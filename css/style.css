@@ -1,8 +1,43 @@
-*{
-    margin-bottom: 0;
+body{
+    margin: 0;
     padding: 0;
-    background: url("Norway.jpg") no-repeat;
+    font-family: sans-serif;
+    background: url("Norway.jpg");
+    background-size: cover;
 }
+.box{
+   /* width: 200px;*/
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
+    width: 500px;
+    box-sizing: border-box;
+
+}
+.box h3{
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    text-align: center;
+    text-decoration-style: -moz-wavy;
+}
+.box input{
+
+}
+form{
+    width: 90%;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px solid #cacaca;
+    background: rgba(190, 189, 194, 0.75);
+    border-radius: 10px 10px 10px 10px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: -moz-left;
+}
+/*
 header{
     position: fixed;
     width: 100%;
@@ -62,4 +97,29 @@ h1{
     text-align: center;
     color: black;
     height: border-box;
+}
+
+*/
+.input{
+    margin: 10px 0px 10px 0px;
+}
+
+.input input{
+    height:40px;
+    width: 90%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px #717171;
+
+}
+.input label{
+   position: relative;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: black;
+pointer-events: none;
+    transition: .5s;
 }
