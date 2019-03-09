@@ -2,11 +2,13 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: url("Norway.jpg");
-    background-size: cover;
+    background: url("Norway.jpg") no-repeat;
+    background-size: 100% 620%;
+
 }
+/*
 .box{
-   /* width: 200px;*/
+   / width: 200px;/
     margin-left: auto;
     margin-right: auto;
     position: center;
@@ -21,10 +23,8 @@ body{
     text-align: center;
     text-decoration-style: -moz-wavy;
 }
-.box input{
-
-}
-form{
+*/
+/*form{
     width: 90%;
     margin-top: 50px;
     padding: 10px;
@@ -88,8 +88,8 @@ h2{
     text-align: center;
     color: black;
     height: border-box;
-}
-h1{
+}*/
+h2{
 
     margin-left: auto;
     margin-right: auto;
@@ -97,9 +97,9 @@ h1{
     text-align: center;
     color: black;
     height: border-box;
+    text-decoration-style: wavy;
 }
 
-*/
 .input{
     margin: 10px 0px 10px 0px;
 }
@@ -111,6 +111,7 @@ h1{
     font-size: 16px;
     border-radius: 10px;
     border: 1px #717171;
+    position: center;
 
 }
 .input label{
@@ -122,4 +123,110 @@ h1{
     color: black;
 pointer-events: none;
     transition: .5s;
+}
+/*need this */
+.login-box{
+    width: 400px;
+    height:380px;
+    background: rgba(0,0,0,.5);
+    color: white;
+    top: 45%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.login-box h2{
+    margin: 0 0 30px;
+    padding: 0;
+    color: white;
+    text-align: center;
+}
+.input-box{
+    position: relative;
+}
+.input-box input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    /*we can do this to show just line not all the input box/border: 1px solid #ffffff;*/
+    border-bottom : 2px solid #ffffff;
+
+    outline: none;
+    background: transparent;
+}
+.input-box label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    letter-spacing: 1px;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label{
+    top: -18px;
+    left: 0;
+    color: aqua;
+    font-size: 12px;
+}
+
+.login-box-btn{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: darkmagenta;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius:5px ;
+    text-align: center;
+
+}
+.login-box p{
+    text-align: center;
+
+}
+.login-box p a{
+    text-align: center;
+    color: gold;
+    text-decoration: none;
+}
+/* staff for registration page*/
+.login-box-re{
+    width: 400px;
+    height:680px;
+    background: rgba(0,0,0,.5);
+    color: white;
+    top: 55%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.login-box-re h2{
+    margin: 0 0 30px;
+    padding: 0;
+    color: white;
+    text-align: center;
+}
+.login-box-re p{
+    text-align: center;
+
+}
+.login-box-re p a{
+    text-align: center;
+    color: gold;
+    text-decoration: none;
 }
