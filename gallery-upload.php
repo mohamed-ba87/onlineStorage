@@ -27,7 +27,7 @@ if (isset($_POST['submit'])){
            $filedistination="../file name". $fileActExt;
            //
            if (empty($title) || empty($fileDis)){
-               header('location : ../gallery.html?upload=empty');
+               header('location : ../gallery.php?upload=empty');
                exit();
            }else{
                $select= "SELECT * FROM nameOfthetable";
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])){
 
                      move_uploaded_file($fileTmpName,$filedistination);
 
-                     header('location : gallery.html?upload=success');
+                     header('location : gallery.php?upload=success');
                  }
              }
              //  $res=mysqli_query($db,$select);
