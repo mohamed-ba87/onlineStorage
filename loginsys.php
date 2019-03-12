@@ -1,6 +1,64 @@
 <?php
 session_start();
-include 'connection.php';
+include ('connection.php');
+
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+
+if (isset($_POST['login'])){
+    $username = mysqli_real_escape_string($db,$_POST['username']);
+    $password = mysqli_real_escape_string($db,$_POST['password']);
+    // doing checking if the user enter the right information
+    if(empty($username) || empty($password)){
+        header('location: login.html?login=wrong_empty');
+        exit();
+    }else{
+        // $pass=md5($password);AND password= '$pass
+        $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
+        $result = mysqli_query($db,$sql);
+        $check= mysqli_num_rows($result);
+        //  print_r($check);
+        //exit();
+        if ($check !=1){
+            header('location: login.html?login=wrong_sql_NotThere');
+            exit();
+        }else{
+                if ($row = mysqli_fetch_assoc($result)){
+                    $password2= password_verify($password,$row['password']);
+                    if ($password2==false){
+                        header('location: login.html?password_wrong_user');
+                        exit();
+                    }elseif ($password2==true){
+                        $_SESSION['username']=$row['username'];
+                        $_SESSION['email']=$row['email'];
+                        $user= $row['username'];
+                        $sql1= "SELECT * FROM user_info WHERE username='$user'";
+
+                        $result1 = mysqli_query($db,$sql1);
+                        $check1= mysqli_num_rows($result1);
+                        $rows = mysqli_fetch_assoc($result1);
+                        $_SESSION['first']=$rows['first_name'];
+                        $_SESSION['last']=$rows['last_name'];
+                        header('location : login.html?login=success');
+                        $_SESSION['allGood']= "you have logged in successfully";
+                        exit();
+                    }
+
+                }else{
+                    header('location: login.html?userNotExist');
+                    exit();
+                }
+            }
+
+        }
+}else{
+    header('location:  ../mainpage.php?login=error');
+    exit();
+}
+/*
+session_start();
+include ('connection.php');
 if (isset($_POST['login'])){
 
     $username= mysqli_real_escape_string($db,$_POST['username']);

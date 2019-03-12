@@ -1,47 +1,197 @@
 <?php
 session_start();
-include 'connection.php';
+include ('connection.php');
 if (isset($_POST['register'])){
-
     $first= mysqli_real_escape_string($db,$_POST['first']);
     $last= mysqli_real_escape_string($db,$_POST['last']);
     $username= mysqli_real_escape_string($db,$_POST['username']);
     $email= mysqli_real_escape_string($db,$_POST['email']);
-    $pass1= mysqli_real_escape_string($db,$_POST['password']);
-    $pass2= mysqli_real_escape_string($db,$_POST['password_con']);
-    if (empty($first) || empty($last) || empty($username) || empty($email) || empty($pass1) || empty($pass2)){
-        header('location: ../register.html?some_are_empty');
+    $pass1 = mysqli_real_escape_string($db,$_POST['password']);
+    $pass2 = mysqli_real_escape_string($db,$_POST['password_con']);
+
+    // checking time lool
+    if (empty($first) || empty($last) || empty($pass1)  || empty($pass2)  || empty($username)  || empty($email)){
+        header('location: register.html?empty');
         exit();
     }else {
+
+        if (! preg_match("/^[a-zA-Z]*$/", $first) || ! preg_match("/^[a-zA-Z]*$/", $last)) {
+            header('location: register.html?first_last=error');
+            exit();
+        } else {
+                if (! filter_var($email,FILTER_VALIDATE_EMAIL)){
+                    header('location: register.html?email=error');
+                    exit();
+                }else{
+                    $check_user = "SELECT * FROM login WHERE username= '$username' OR email='$email' ";
+                    $result = mysqli_query($db, $check_user);
+                    $get = mysqli_num_rows($result);
+                    if ($get != 0) {
+                        header('location: register.html?email_username=taken');
+                        exit();
+                    }else{
+                        if ($pass1 != $pass2){
+                            header('location: register.html?password=not_match');
+                            exit();
+                        }else{
+                            $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
+                            // insert the login data into login table
+                            $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
+                            $res=mysqli_query($db,$sql);
+
+                            // insert the tradesman data into tradesman table
+                            $sql_user= "INSERT INTO user (username,firstname,lastname)
+                                      VALUES ('$username', '$first','$last')";
+                            mysqli_query($db,$sql_user);
+                            $_SESSION['user']= $username;
+                            header('location : register.html?login=success');
+
+                        }
+                    }
+
+                }
+            }
+    }
+}else{
+    header('location: ../mainpage.php');
+    exit();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+session_start();
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+
+$db = mysqli_connect('CSDM-WEBDEV ','1808234','1808234','db1808234_onlineStorage');
+
+if (isset($_POST['register'])) {
+
+    $first = mysqli_real_escape_string($db, $_POST['first']);
+    $last = mysqli_real_escape_string($db, $_POST['last']);
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $pass1 = mysqli_real_escape_string($db, $_POST['password']);
+    $pass2 = mysqli_real_escape_string($db, $_POST['password_con']);
+
+    print_r($last);
+    exit();
+    if (empty($first) || empty($last) || empty($username) || empty($email) || empty($pass1) || empty($pass2)) {
+        header('location: register.html?some_are_empty');
+        exit();
+    }
+
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/",$username)){
+        header('location: register.html?username_or_email=not_Valid');
+        exit();
+    }
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header('location: register.html?email=not_Valid');
+        exit();
+    }
+    else if (!preg_match("/^[a-zA-Z0-9]*$/",$username)){
+        header('location: register.html?username=not_Valid');
+        exit();
+    }
+    else if  ($pass1 != $pass2) {
+        header('location: ../register.html?password_not_matched');
+        exit();
+    }
+    else{
+
+        $sql = "SELECT * FROM login WHERE username= ? AND email= ?";
+        $stmt= mysqli_stmt_init($db);
+
+        if (! mysqli_stmt_prepare($stmt,$sql)){
+            header('location : register.html?sql_error');
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt,"ss",$username,$email);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+            $check = mysqli_stmt_num_rows($stmt);
+
+            if ($check != 0){
+                header('location : register.html?email_username=taken');
+                exit();
+            }
+            else{
+                $sql1 = "INSERT INTO login( username,email,password,types) values (?,?,?,1)";
+                $stmt= mysqli_stmt_init($db);
+                if (! mysqli_stmt_prepare($stmt,$sql)){
+                    header('location : register.html?insert_error');
+                    exit();
+                }else{
+                    $password = password_hash($pass2, PASSWORD_DEFAULT);
+                    mysqli_stmt_bind_param($stmt,"sss1",$username,$email,$password,1);
+                    mysqli_stmt_execute($stmt);
+
+                    $sql2 = "INSERT INTO login( username,email,password,types) values (?,?,?,1)";
+                    $stmt= mysqli_stmt_init($db);
+                    mysqli_stmt_bind_param($stmt,"sss",$username,$first,$last);
+                    mysqli_stmt_execute($stmt);
+
+                }
+            }
+        }
+    }
+   // mysqli_stmt_close($stmt);
+}//else{
+   // header('location: register.html');
+    //exit();
+//}
+
+    /*else {
         if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last)) {
-            header('location: ../register.html?first_last=notRight');
+            header('location: register.html?first_last=notRight');
             exit();
         } else {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $sql2 = "SELECT * FROM users WHERE email='$email'";
+                $sql2 = "SELECT * FROM login WHERE email='$email'";
                 $result1 = mysqli_query($db, $sql2);
                 $check1 = mysqli_num_rows($result1);
                 if ($check1 != 0) {
-                    header('location: ../register.html?email=takenOr_notRight');
+                    header('location: register.html?email=takenOr_notRight');
                     exit();
                 } else {
-                    $sql = "SELECT * FROM users WHERE username='$username'";
-                    $result = mysqli_query($db, $sql);
-                    $check = mysqli_num_rows($result);
-                    if ($check != 0) {
-                        header('location: ../register.html?username=taken');
+                    if (!preg_match("/^[a-zA-Z0-9]*$/",$username)){
+                        header('location: register.html?username=must_have_number');
                         exit();
-                    } else {
-                        if ($pass1 != $pass2) {
-                            header('location: ../register.html?password_not_matched');
+                    }
+                    else{
+                        $sql = "SELECT * FROM login WHERE username='$username'";
+                        $result = mysqli_query($db, $sql);
+                        $check = mysqli_num_rows($result);
+                        if ($check != 0) {
+                            header('location: ../register.html?username=taken');
                             exit();
                         } else {
-                            $password = password_hash($pass2, PASSWORD_DEFAULT);
-                            $sql1 = "INSERT INTO users (first_name,last_name,username,email,password) VALUES ('$first','$last','$username','$email','$password')";
-                            mysqli_query($db, $sql1);
-                            header('location : ../homePage.php');
+                            if ($pass1 != $pass2) {
+                                header('location: ../register.html?password_not_matched');
+                                exit();
+                            } else {
+                                $password = password_hash($pass2, PASSWORD_DEFAULT);
+                                $sql1 = "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
+                                mysqli_query($db, $sql1);
+                                $sql = "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username','$first','$last')";
+                                mysqli_query($db, $sql);
+                                header('location : ../homePage.php');
+                            }
                         }
                     }
+
                 }
             }
         }
