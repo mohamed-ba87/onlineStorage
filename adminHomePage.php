@@ -18,10 +18,10 @@
         <ul>
 
             <li> <form method="post" action="adminHomePage.php"><button type="submit" name="add">Add User</button></form></li>
-            <li><button type="submit" name="update">Update</button></li>
-            <li><button type="submit" name="delete"> Delete</button></li>
-            <li><button name="search" type="submit">search</button></li>
-            <li><button class="exit" type="submit" name="out">sign out</button></li>
+            <li><form method="post" action="adminHomePage.php"><button type="submit" name="update">Update</button></form></li>
+            <li><form action="adminHomePage.php" method="post"><button type="submit" name="delete"> Delete</button></form></li>
+            <li><form method="post" action="adminHomePage.php"><button name="search" type="submit">search</button></form></li>
+            <li><form method="post" action="log-out.php"><button class="exit" type="submit" name="out">sign out</button></form></li>
         </ul>
     </nav>
 
