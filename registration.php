@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ('connection.php');
-if (isset($_POST['register'])){
+if (isset($_POST['register'] )){
     $first= mysqli_real_escape_string($db,$_POST['first']);
     $last= mysqli_real_escape_string($db,$_POST['last']);
     $username= mysqli_real_escape_string($db,$_POST['username']);
@@ -40,8 +40,7 @@ if (isset($_POST['register'])){
                             $res=mysqli_query($db,$sql);
 
                             // insert the tradesman data into tradesman table
-                            $sql_user= "INSERT INTO user (username,firstname,lastname)
-                                      VALUES ('$username', '$first','$last')";
+                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                             mysqli_query($db,$sql_user);
                             $_SESSION['user']= $username;
                             header('location : register.html?login=success');
