@@ -46,8 +46,10 @@ nav ul li button:hover{
     color: -webkit-focus-ring-color;
     background-color: transparent;
 }
+.exit{
+    float: bottom;
+}
 .exit:hover{
-
     background-color: red;
 }
 
