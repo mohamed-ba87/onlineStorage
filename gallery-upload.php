@@ -1,9 +1,10 @@
 <?php
 session_start();
 include ('connection.php');
+
 if (isset($_POST['submit'])){
     $newFile= mysqli_real_escape_string($db,$_POST['filename']);
-    if ( empty($_POST['filename'])){
+    if ( empty($newFile)){
         $newFile="gallery";
     }else{
         $newFile= strtolower(str_replace(" ","-",$newFile));
@@ -22,9 +23,9 @@ if (isset($_POST['submit'])){
    $fileActExt= strtolower(end($fileExt));
 
    if ($fileError===0){
-       if ($fileSize<3500){
+       if ($fileSize<350000){
            $imageName= $newFile . ".".uniqid("",true).".".$fileActExt;
-           $filedistination="../file name". $fileActExt;
+           $fileDestination="../file name". $fileActExt;
            //
            if (empty($title) || empty($fileDis)){
                header('location : ../gallery.php?upload=empty');
@@ -38,16 +39,14 @@ if (isset($_POST['submit'])){
                  mysqli_stmt_execute($ck);
                  $reslut= mysqli_stmt_get_result($ck);
                  $rowsNum= mysqli_num_rows($reslut);
-                 $setimage= $rowsNum+1;
-                 $sql= "INSERT INTO nameOfTable () VALUES (?,?,?,?)";
+                 $setImage= $rowsNum+1;
+                 $sql= "INSERT INTO nameOfTable () VALUES (? , ? , ? , ? )";
                  if (! mysqli_stmt_prepare($ck,$select)){
                      echo  "statement failed!";
                  }else{
-                     mysqli_stmt_bind_param($ck,"ssss",$title,$fileDis,$imageName,$setimage);
+                     mysqli_stmt_bind_param($ck,"ssss",$title,$fileDis,$imageName,$setImage);
                      mysqli_stmt_execute($ck);
-
-                     move_uploaded_file($fileTmpName,$filedistination);
-
+                     move_uploaded_file($fileTmpName,$fileDestination);
                      header('location : gallery.php?upload=success');
                  }
              }

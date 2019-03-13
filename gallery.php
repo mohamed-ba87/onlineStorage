@@ -39,9 +39,9 @@
                         <p>mohamed</p>
                     </a>
         <!--here will be the java script link-->   <?php
-                include 'connection.php';
+                include ('connection.php');
                 $sql= "SELECT * FROM nameOftable ORDER BY oredergallery DESC";
-                $tsmt= mysqli_stmt_init();
+                $tsmt= mysqli_stmt_init($db);
                 if (! mysqli_stmt_prepare($tsmt,$sql)){
                     echo "statement failed!";
                 }else{
@@ -49,11 +49,15 @@
                     $result= mysqli_stmt_get_result($tsmt);
 
                     while ($row= mysqli_fetch_assoc($result)){
-                      echo '<a href="">
-                            <div style="background-image:url("we need to give the path",'.$row['imageName'].'); "></div>
-                            <h3>'.$row['imageTitle'].'</h3>
-                            <p>'.$row['imageDes'].'</p>
-                          </a>';
+                        $imageTit=$row['imageTitle']; //<- need to pass the data base name
+                        $imgName=$row['imageName'];  //<- need to pass real database name
+                        $imgDes=$row['imageDes'];    //<- need to pass real database name
+                        //here we will pass java script link
+                      echo" <a href=''>  
+                            <div style='background-image:url('we need to give the path',.'$imgName'.); '></div>
+                            <h3>'.$imageTit.'</h3>
+                            <p>'.$imgDes.'</p>
+                          </a>";
 
                     }
                 }
@@ -63,16 +67,15 @@
             <?php
             if(isset($_SESSION['username'])){
 
-            echo '<div class="gallery-upload">
-                <form method="post" action="gallery-upload.php" enctype="multipart/form-data">
-                    <input type="text" name="filename" placeholder="file name">
-                    <input type="text" name="title" placeholder="file title">
-                    <input type="text" name="fileDis" placeholder="image des">
-                    <input type="text" name="file">
-                    <button type="submit" name=" submit">Upload</button>
-
+            echo "<div class='gallery-upload'>
+                <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
+                    <input type='text' name='filename' placeholder='file name'>
+                    <input type='text' name='title' placeholder='file title'>
+                    <input type='text' name='fileDis' placeholder='image des'>
+                    <input type='text' name='file'>
+                    <button type='submit' name='submit'>Upload</button>
                 </form>
-            </div>';
+            </div>";
         }
         ?>
 
