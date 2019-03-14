@@ -83,7 +83,7 @@ header{
     color: #5d4f5c;
     text-align: center;
     top: 30%;
-    margin-top: 15%;
+    margin-top: 12%;
 }
 .headerX{
     position: fixed;
@@ -139,10 +139,10 @@ pointer-events: none;
 /*need this */
 .login-box{
     width: 400px;
-    height:300px;
+    height:380px;
     background: rgba(0,0,0,.5);
     color: white;
-    top: 55%;
+    top: 40%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
@@ -241,4 +241,14 @@ pointer-events: none;
     text-align: center;
     color: gold;
     text-decoration: none;
+}
+.a{
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    float: right;
+    text-decoration: none;
+}
+.a:hover {
+    color: mediumturquoise;
 }

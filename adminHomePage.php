@@ -18,13 +18,25 @@ if ( !isset( $_SESSION['user'])) {
     <title>Admin Home Page</title>
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/unsemantic-grid-responsive-tablet.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        function my() {
+            var just = confirm('Are you sure want to close the form?');
+            if (just){return true;}
+        }
+    </script>
 </head>
 <body >
 <div class="">
 <header>
-    <h2>Admin</h2>
+    <center>
+         <a href=""><img class="profile_img" src="img/admin_profile.png"></a>
+        <center>
+    <h3>Admin</h3>
 </header>
-<!--<a href="#">London</a>,-->
+
 <section>
     <nav>
         <ul>
@@ -86,39 +98,38 @@ if ( !isset( $_SESSION['user'])) {
                       
                         </div>
                   </form>
+                  
                   <form action='adminJobs/close.php' method='post'>
                     <div>
                          <button style='background: red' class='input-bt' type='submit' onclick='my()' name='close'>Cancel</button>
                     </div>
-                     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>
-                     <script>
-                   function my() {
-                      var just = confirm('Press a button');
-                      if (just==0){}
-                          return alert('form closed');
-                   }
-                </script>
-                </form> ";
+                </form>";
+
         }
         // delete form for the admin delete a usr from the database
         if (isset($_POST['delete'])){
-            echo "<form action='adminJobs/delete.php' method='post'>
-                            
+            echo "<form action='adminJobs/delete.php' method='post'>                        
                           <div class='input-box'>
                                 <label>Username/email</label>
-                                <input type='text' name='de' placeholder='username that want to delete' required>
+                                <input type='text' name='de' placeholder='username/email that want to delete' required>
                               
                           </div>
-                                <button type='submit' id='delete' name='delete' class='input-bt' >Delete</button>
-                                
-                  </form>
+                                <button onclick='del()' type='submit' id='delete' name='delete' class='input-bt' >Delete</button>
+                       <script>
+                             function del() {
+                             return alert('user been deleted');
+                             }
+                        </script> 
+                       <!-- // closing button or cancel-->      
+                    </form>
                   <form action='adminJobs/close.php' method='post'>
                     <div>
-                         <button style='background: red' class='input-bt' type='submit' onclick='my()' name='close'>Cancel</button>
+                         <button style='background: red' class='input-bt' type='submit' onclick=' my()' name='close'>Cancel</button>
                     </div>
-                    </form>
-                                ";
+
+                    </form>";
         }
+
         ?>
 
     </article>
