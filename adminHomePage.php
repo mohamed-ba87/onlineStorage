@@ -23,7 +23,7 @@ if ( !isset( $_SESSION['user'])) {
 
     <script>
         function my() {
-            var just = confirm('Are you sure want to close the form?');
+            var just = confirm('Are you sure want to cancel this process?');
             if (just){return true;}
         }
     </script>
