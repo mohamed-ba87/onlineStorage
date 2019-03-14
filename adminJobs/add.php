@@ -34,9 +34,11 @@ if (isset($_POST['add_user'])){
                         header('location: ../adminHomePage.php?password=not_match');
                         exit();
                     }else{
+                        $type= mysqli_real_escape_string($db,$_POST['user_type']);
+                        if ( preg_match('/^[Add Administrator]*$/',$type)){
                         $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                         // insert the login data into login table
-                        $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
+                        $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',1)";
                         $res=mysqli_query($db,$sql);
 
                         // insert the tradesman data into tradesman table
@@ -44,6 +46,16 @@ if (isset($_POST['add_user'])){
                         mysqli_query($db,$sql_user);
                         $_SESSION['user']= $username;
                         header('location : ../adminHomePage.php?new_user=added');
+                        }else{
+                            $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
+                            $res=mysqli_query($db,$sql);
+
+                            // insert the tradesman data into tradesman table
+                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
+                            mysqli_query($db,$sql_user);
+                            $_SESSION['user']= $username;
+                            header('location : ../adminHomePage.php?new_user=added');
+                        }
 
                     }
                 }

@@ -83,6 +83,7 @@ header{
     color: #5d4f5c;
     text-align: center;
     top: 30%;
+    margin-top: 15%;
 }
 .headerX{
     position: fixed;
@@ -138,7 +139,7 @@ pointer-events: none;
 /*need this */
 .login-box{
     width: 400px;
-    height:380px;
+    height:300px;
     background: rgba(0,0,0,.5);
     color: white;
     top: 55%;

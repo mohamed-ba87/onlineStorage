@@ -17,10 +17,10 @@ body{
 }
 .login-box-re{
     width: 400px;
-    height:650px;
+    height:600px;
     background: rgba(0,0,0,.5);
     color: white;
-    top: 53%;
+    top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
