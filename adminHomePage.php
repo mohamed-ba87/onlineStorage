@@ -78,7 +78,7 @@ if ( !isset( $_SESSION['user'])) {
                                  <label>Type of User</label>
                                             <select name='user_type'>
                                             <option></option>
-                                            <option>add user</option>
+                                            <option>Add User</option>
                                             <option>Add Administrator</option>
                                  </select>
                             </div>
