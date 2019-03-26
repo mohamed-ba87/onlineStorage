@@ -36,7 +36,16 @@
                     <input type="password" name="password" placeholder="" required>
                     <label>Password</label>
                 </div>
-                <a class="a" href="#">forget Password?</a>
+                <?php
+                session_start();
+                include ('connection.php');
+                if (isset($_GET['new+pwd'])){
+                    if ($_GET['new+pwd']=="passwordUpdated"){
+                        echo "<p>your password been updated</p>";
+                    }
+                }
+                ?>
+                <a class="a" href="forget_password/restPasswordPage.html">forget Password?</a>
                 <br>
                 <div >
                     <button class="login-box-btn" type="submit" name="login">Login</button>
