@@ -37,6 +37,9 @@ if ( !isset( $_SESSION['user'])) {
     <h3>Admin</h3>
 </header>
 
+    <?php// echo $_SESSION['allGood'];
+    ?>
+
 <section>
     <nav>
         <ul>

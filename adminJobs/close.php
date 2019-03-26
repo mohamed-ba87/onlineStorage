@@ -2,6 +2,6 @@
 session_start();
 if (isset($_POST['close'])){
     session_destroy();
-    header('location : ../adminHomePage.php');
+    header('location : adminHomePage.php');
     exit();
 }

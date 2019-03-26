@@ -2,6 +2,7 @@
 session_start();
 include ('connection.php');
 if (isset($_POST['register'] )){
+
     $first= mysqli_real_escape_string($db,$_POST['first']);
     $last= mysqli_real_escape_string($db,$_POST['last']);
     $username= mysqli_real_escape_string($db,$_POST['username']);
@@ -10,7 +11,7 @@ if (isset($_POST['register'] )){
     $pass2 = mysqli_real_escape_string($db,$_POST['password_con']);
 
     // checking time lool
-    if (empty($first) || empty($last) || empty($pass1)  || empty($pass2)  || empty($username)  || empty($email)){
+    if (empty($first) || empty($last)   || empty($username)  || empty($email) || empty($pass1)  || empty($pass2)){
         header('location: register.html?empty');
         exit();
     }else {
@@ -36,14 +37,15 @@ if (isset($_POST['register'] )){
                         }else{
                             $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                             // insert the login data into login table
-                            $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
-                            $res=mysqli_query($db,$sql);
+                            $sql_login= "INSERT INTO  login (username, email, password, type) VALUES ('$username','$email','$password',0)";
+                            $res=mysqli_query($db,$sql_login);
 
                             // insert the tradesman data into tradesman table
                             $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                             mysqli_query($db,$sql_user);
+
                             $_SESSION['user']= $username;
-                            header('location : register.html?login=success');
+                            header('location : ../register.html?login=success');
 
                         }
                     }
@@ -52,7 +54,7 @@ if (isset($_POST['register'] )){
             }
     }
 }else{
-    header('location: ../mainpage.php');
+    header('location: register.php');
     exit();
 }
 
@@ -199,4 +201,4 @@ if (isset($_POST['register'])) {
 }else{
     header('location: ../register.html');
     exit();
-}
+}*/

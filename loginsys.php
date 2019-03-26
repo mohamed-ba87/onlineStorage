@@ -11,7 +11,7 @@ if (isset($_POST['login'])){
     $password = mysqli_real_escape_string($db,$_POST['password']);
     // doing checking if the user enter the right information
     if(empty($username) || empty($password)){
-        header('location: login.html?login=wrong_empty');
+        header('location: login.php?login=wrong_empty');
         exit();
     }else{
         // $pass=md5($password);AND password= '$pass
@@ -21,32 +21,61 @@ if (isset($_POST['login'])){
         //  print_r($check);
         //exit();
         if ($check !=1){
-            header('location: login.html?login=wrong_sql_NotThere');
+            header('location: login.php?login=wrong_sql_NotThere');
             exit();
         }else{
-                if ($row = mysqli_fetch_assoc($result)){
-                    $password2= password_verify($password,$row['password']);
-                    if ($password2==false){
-                        header('location: login.html?password_wrong_user');
-                        exit();
-                    }elseif ($password2==true){
-                        $_SESSION['username']=$row['username'];
-                        $_SESSION['email']=$row['email'];
-                        $user= $row['username'];
-                        $sql1= "SELECT * FROM user_info WHERE username='$user'";
 
-                        $result1 = mysqli_query($db,$sql1);
-                        $check1= mysqli_num_rows($result1);
-                        $rows = mysqli_fetch_assoc($result1);
-                        $_SESSION['first']=$rows['first_name'];
-                        $_SESSION['last']=$rows['last_name'];
-                        header('location : login.html?login=success');
-                        $_SESSION['allGood']= "you have logged in successfully";
-                        exit();
+                if ($row = mysqli_fetch_assoc($result)){
+                    $type= $row['type'];
+                    if ($row['type']==1){
+                        $password2= password_verify($password,$row['password']);
+                        if ($password2==false){
+                            header('location: login.php?password_wrong_user');
+                            exit();
+                        }elseif ($password2==true){
+                            $_SESSION['username']=$row['username'];
+                            $_SESSION['email']=$row['email'];
+                            $user= $row['username'];
+                            $sql1= "SELECT * FROM user_info WHERE username='$user'";
+                            $result1 = mysqli_query($db,$sql1);
+                            $check1= mysqli_num_rows($result1);
+                            $rows = mysqli_fetch_assoc($result1);
+                            $_SESSION['first']=$rows['first_name'];
+                            $_SESSION['last']=$rows['last_name'];
+                            header('location : adminHomePage.php?login=success');
+                            $_SESSION['allGood']= "you have logged in successfully";
+                            exit();
+                        }
+                    }else{
+
+                        if ($row['type']==0){
+                            $password2= password_verify($password,$row['password']);
+                            if ($password2==false){
+                                header('location: login.php?password_wrong_user');
+                                exit();
+                            }elseif ($password2==true){
+                                $_SESSION['username']=$row['username'];
+                                $_SESSION['email']=$row['email'];
+                                $user= $row['username'];
+                                $sql1= "SELECT * FROM user_info WHERE username='$user'";
+                                $result1 = mysqli_query($db,$sql1);
+                                $check1= mysqli_num_rows($result1);
+                                $rows = mysqli_fetch_assoc($result1);
+                                $_SESSION['first']=$rows['first_name'];
+                                $_SESSION['last']=$rows['last_name'];
+                                header('location : userHomePage?login=success');
+                                $_SESSION['allGood']= "you have logged in successfully";
+                                exit();
+                            }
+                        }else{
+                            echo "user not exist on the system please register first";
+                            header('location : register.html?user_not_exits');
+                        }
+
                     }
 
                 }else{
-                    header('location: login.html?userNotExist');
+                    header('location: login.php?userNotExist');
                     exit();
                 }
             }

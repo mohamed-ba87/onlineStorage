@@ -45,7 +45,7 @@ if (isset($_POST['add_user'])){
                         $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                         mysqli_query($db,$sql_user);
                         $_SESSION['user']= $username;
-                        header('location : ../adminHomePage.php?new_user=added');
+                        header('location : adminHomePage.php?new_user=added');
                         }else{
                             if ( preg_match('/^[Add User]*$/',$type)){
                             $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
@@ -54,10 +54,10 @@ if (isset($_POST['add_user'])){
                             $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                             mysqli_query($db,$sql_user);
                             $_SESSION['user']= $username;
-                            header('location : ../adminHomePage.php?new_user=added');
+                            header('location : adminHomePage.php?new_user=added');
                             }else{
                                 echo "this user type not right ";
-                                header('location : ../adminHomePage.php');
+                                header('location : adminHomePage.php');
                             }
                         }
 

@@ -10,7 +10,7 @@ $user="root";
 $pass="";
 $DB_name= "users";
 
-$db = mysqli_connect('CSDM-WEBDEV ','1808234','1808234','db1808234_onlineStorage');
+$db = mysqli_connect('localhost',$user,$pass,$DB_name);
 if($db-> connect_error) {
     die('Error'.('.$db->connect_errno.'));
 }
