@@ -10,7 +10,7 @@ $user="root";
 $pass="";
 $DB_name= "users";
 
-$db = mysqli_connect('localhost',$user,$pass,$DB_name);
+$db = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
 if($db-> connect_error) {
     die('Error'.('.$db->connect_errno.'));
 }

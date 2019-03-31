@@ -37,7 +37,7 @@ if (isset($_POST['register'] )){
                         }else{
                             $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                             // insert the login data into login table
-                            $sql_login= "INSERT INTO  login (username, email, password, type) VALUES ('$username','$email','$password',0)";
+                            $sql_login= "INSERT INTO  login (username, email, password, types) VALUES ('$username','$email','$password',0)";
                             $res=mysqli_query($db,$sql_login);
 
                             // insert the tradesman data into tradesman table
@@ -45,7 +45,7 @@ if (isset($_POST['register'] )){
                             mysqli_query($db,$sql_user);
 
                             $_SESSION['user']= $username;
-                            header('location : ../register.html?login=success');
+                            header('location : register.html?login=success');
 
                         }
                     }

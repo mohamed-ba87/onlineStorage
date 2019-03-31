@@ -26,8 +26,8 @@ if (isset($_POST['login'])){
         }else{
 
                 if ($row = mysqli_fetch_assoc($result)){
-                    $type= $row['type'];
-                    if ($row['type']==1){
+                    $type= $row['types'];
+                    if ($row['types']==1){
                         $password2= password_verify($password,$row['password']);
                         if ($password2==false){
                             header('location: login.php?password_wrong_user');
@@ -44,6 +44,8 @@ if (isset($_POST['login'])){
                             $_SESSION['last']=$rows['last_name'];
                             header('location : adminHomePage.php?login=success');
                             $_SESSION['allGood']= "you have logged in successfully";
+
+                            header('location : adminHomePage.php?login=success');
                             exit();
                         }
                     }else{

@@ -3,6 +3,7 @@ session_start();
 include ('connection.php');
 
 if (isset($_POST['submit'])){
+    $username= $_SESSION['username'];
     $newFile= mysqli_real_escape_string($db,$_POST['filename']);
     if ( empty($newFile)){
         $newFile="gallery";
@@ -25,32 +26,22 @@ if (isset($_POST['submit'])){
    if ($fileError===0){
        if ($fileSize<350000){
            $imageName= $newFile . ".".uniqid("",true).".".$fileActExt;
-           $fileDestination="../file name". $fileActExt;
+           $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/css/CSS/capture/images/". $fileActExt;
            //
            if (empty($title) || empty($fileDis)){
                header('location : ../gallery.php?upload=empty');
                exit();
            }else{
-               $select= "SELECT * FROM nameOfthetable";
-               $ck=mysqli_stmt_init($db);
-             if (! mysqli_stmt_prepare($ck,$select)){
-                 echo  "statement failed!";
-             }else{
-                 mysqli_stmt_execute($ck);
-                 $reslut= mysqli_stmt_get_result($ck);
-                 $rowsNum= mysqli_num_rows($reslut);
+               $select= "SELECT * FROM user_images";
+               $ck=mysqli_query($db,$select);
+
+                 $rowsNum= mysqli_num_rows($ck);
                  $setImage= $rowsNum+1;
-                 $sql= "INSERT INTO nameOfTable () VALUES (? , ? , ? , ? )";
-                 if (! mysqli_stmt_prepare($ck,$select)){
-                     echo  "statement failed!";
-                 }else{
-                     mysqli_stmt_bind_param($ck,"ssss",$title,$fileDis,$imageName,$setImage);
-                     mysqli_stmt_execute($ck);
+                 $sql= "INSERT INTO user_images (username,title,fileDis,imageName,setImage) VALUES ('$username' ,'$title' , '$fileDis' , '$imageName' , '$setImage' )";
+
                      move_uploaded_file($fileTmpName,$fileDestination);
                      header('location : gallery.php?upload=success');
-                 }
-             }
-             //  $res=mysqli_query($db,$select);
+
 
            }
 

@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: url("Norway.jpg") no-repeat;
+    background: url("Norway.jpg") ;
     background-size: cover;
 
 }
@@ -168,8 +168,8 @@ pointer-events: none;
     margin-bottom: 30px;
     border: none;
     /*we can do this to show just line not all the input box/border: 1px solid #ffffff;*/
-    border-bottom : 1px solid #ffffff;
-
+    border-bottom : 2px solid #ffffff;
+    border-radius: 10%;
     outline: none;
     background: transparent;
 }

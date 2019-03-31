@@ -2,7 +2,8 @@
 session_start();
 include "../connection.php";
 if (isset($_POST['rest_password'])){
-    $selector=bin2hex(random_bytes(8));
+
+    $selector=  bin2hex(random_bytes(8));
     $token=bin2hex(random_bytes(32));
 
     $url= "here we put our like or url that we need to send the user to/?selector=".$selector."token".$token;
@@ -49,7 +50,7 @@ if (isset($_POST['rest_password'])){
 
     email($to,$subject,$massage,$header);
 
-    header('location : restPasswordPHP.php');
+    header('location : ../login.php');
 
 }else{
     header('location : ../login.php');

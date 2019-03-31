@@ -32,15 +32,58 @@ if ( !isset( $_SESSION['user'])) {
 <div class="">
 <header>
     <center>
-         <a href=""><img class="profile_img" src="img/admin_profile.png"></a>
+        <?php
+        if (empty($_SESSION['pic'])){ ?>
+            <img class="profile_img"  src="img/admin_profile.png" onclick="document.getElementById('id01').style.display='block'">
+        <?php }else{
+            $image = "img/".$_SESSION['pic'];
+            ?>
+            <img class="profile_img" alt="upload pic" src="<?php echo $image;?>" onclick="document.getElementById('id01').style.display='block'">
+       <?php } ?>
+
         <center>
     <h3>Admin</h3>
 </header>
 
-    <?php// echo $_SESSION['allGood'];
-    ?>
+   <!--
+ <div id="profile_img1" class="profile_image">
+        <input type="file" name ="file">
+    <button name="upload" type="submit"></button>
+     <button onclick="document.getElementById('profile_img1').style.display='none'">Cancel</button>
+ </div>
+    -->
+    <div id="id01" class="modal">
 
-<section>
+        <form class="modal-content animate" action="#">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+            </div>
+
+            <div class="container">
+                <input type="file" name ="file">
+                <button name="upload" type="submit">Upload</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <section>
     <nav>
         <ul>
 
@@ -102,6 +145,12 @@ if ( !isset( $_SESSION['user'])) {
                 </div>
             </form>
 
+            <!--started here
+
+
+
+
+            end here-->
             <form onsubmit="return confirm('Are Sure you?')"  action='adminJobs/close.php' method='post'>
                 <div>
                     <button style='background: red' class='input-bt' type='submit'  name='close'>Cancel</button>
