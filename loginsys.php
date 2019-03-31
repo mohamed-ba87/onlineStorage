@@ -18,8 +18,7 @@ if (isset($_POST['login'])){
         $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
         $result = mysqli_query($db,$sql);
         $check= mysqli_num_rows($result);
-        //  print_r($check);
-        //exit();
+
         if ($check !=1){
             header('location: login.php?login=wrong_sql_NotThere');
             exit();
@@ -50,12 +49,13 @@ if (isset($_POST['login'])){
                         }
                     }else{
 
-                        if ($row['type']==0){
+                        if ($row['types']==0){
                             $password2= password_verify($password,$row['password']);
                             if ($password2==false){
                                 header('location: login.php?password_wrong_user');
                                 exit();
                             }elseif ($password2==true){
+
                                 $_SESSION['username']=$row['username'];
                                 $_SESSION['email']=$row['email'];
                                 $user= $row['username'];
@@ -65,7 +65,7 @@ if (isset($_POST['login'])){
                                 $rows = mysqli_fetch_assoc($result1);
                                 $_SESSION['first']=$rows['first_name'];
                                 $_SESSION['last']=$rows['last_name'];
-                                header('location : userHomePage?login=success');
+                                header('location : galleery.php?login=success');
                                 $_SESSION['allGood']= "you have logged in successfully";
                                 exit();
                             }
@@ -125,4 +125,4 @@ if (isset($_POST['login'])){
 }else{
     header('location : register.html?you_need_to_register');
     exit();
-}
+}*/

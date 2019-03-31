@@ -53,6 +53,7 @@
                 include ('connection.php');
                 $sql= "SELECT * FROM nameOftable ORDER BY oredergallery DESC";
                 $tsmt= mysqli_stmt_init($db);
+
                 if (! mysqli_stmt_prepare($tsmt,$sql)){
                     echo "statement failed!";
                 }else{
