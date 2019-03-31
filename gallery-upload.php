@@ -35,7 +35,7 @@ if (isset($_POST['submit'])){
            $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/userImages/". $imageName;
 
            if (empty($title) || empty($fileDis)){
-               header('location galleery.php?upload=empty');
+               header('location gallery.php?upload=empty');
                exit();
            }else{
                $select= "SELECT * FROM user_images";
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])){
                $result=  mysqli_query($db,$sql);
 
                      move_uploaded_file($fileTmpName,$fileDestination);
-                     header('location : galleery.php?upload=success');
+                     header('location : gallery.php?upload=success');
 
 
            }
