@@ -32,7 +32,7 @@ if (isset($_POST['submit'])){
        if ($fileSize<350000){
            $imageName= $newFile . ".".uniqid("",true).".".$fileActExt;
 
-           $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/css/CSS/capture/images/". $imageName;
+           $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/userImages/". $imageName;
 
            if (empty($title) || empty($fileDis)){
                header('location galleery.php?upload=empty');

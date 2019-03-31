@@ -1,107 +1,184 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Gallery</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/animate.css">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/aos.css">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/style.css">
+
+
+    <link rel="stylesheet" href="css/css/gallery.css">
+    <!-- this my staff just added-->
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.custom-file-input input[type="file"]').change(function(e){
+                $(this).siblings('input[type="text"]').val(e.target.files[0].name);
+            });
+        });
+    </script>
     <link rel="stylesheet" href="css/gallery.css">
-    <link rel="stylesheet" href="css/unsemantic-grid-responsive-tablet.css">
-    <title>My PortFolio</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Demo for the tutorial: Styling and Customizing File Inputs the Smart Way" />
-    <meta name="keywords" content="cutom file input, styling, label, cross-browser, accessible, input type file" />
-    <meta name="author" content="Osvaldas Valutis for Codrops" />
-    <!-- javascript links-->
-    <script src="js/custom-file-input.js"></script>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+    <!--this the end of the staff just added-->
 
 </head>
 <body>
 
-<header>
-    <a href="" class="">mmtuts</a>
-    <nav>
-        <ul>
-            <li><a href="">Portfolio</a></li>
-            <li><a href="">About me</a></li>
-            <li><a href="">content</a></li>
-        </ul>
-        <a href="">Cases</a>
-    </nav>
-</header>
-<main>
-    <section class="gallery-links">
-        <div class="wrapper">
-            <h2>gallery</h2>
-<!--style="background-image:url("we need to give the path",'.$row['imageName'].'); "-->
-            <div class="gallery-container">
-                <a href="">
-                    <div ></div>
-            <h3>elhadi </h3>
-            <p>mohamed</p>
-            </a>
-                <div class="gallery-container">
-                    <a href="">
-                        <div ></div>
-                        <h3>elhadi </h3>
-                        <p>mohamed</p>
-                    </a>
-        <!--here will be the java script link-->   <?php
-                include ('connection.php');
-                $sql= "SELECT * FROM nameOftable ORDER BY oredergallery DESC";
-                $tsmt= mysqli_stmt_init($db);
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+        <h1 id="colorlib-logo"><a href="index.html"><span class="flaticon-camera"></span>Capture</a></h1>
+        <nav id="colorlib-main-menu" role="navigation">
+            <ul>
+                <li><a href="index.html">Profile</a></li>
+                <li class="colorlib-active"><a href="galleery.php">Gallery</a></li>
 
-                if (! mysqli_stmt_prepare($tsmt,$sql)){
-                    echo "statement failed!";
-                }else{
-                    mysqli_stmt_execute($tsmt);
-                    $result= mysqli_stmt_get_result($tsmt);
+            </ul>
+        </nav>
+    </aside> <!-- END COLORLIB-ASIDE -->
 
-                    while ($row= mysqli_fetch_assoc($result)){
-                        $imageTit=$row['imageTitle']; //<- need to pass the data base name
-                        $imgName=$row['imageName'];  //<- need to pass real database name
-                        $imgDes=$row['imageDes'];    //<- need to pass real database name
-                        //here we will pass java script link
-                      echo" <a href=''>  
-                            <div style='background-image:url('C:/inetpub/wwwroot/1808234/CMM004-NewProject-master/CMM004-NewProject-master/img/'.'$imgName'.); '></div>
-                            <h3>'.$imageTit.'</h3>
-                            <p>'.$imgDes.'</p>
-                          </a>";
 
-                    }
-                }
-                ?>
+    <div id="colorlib-main">
+        <section class="ftco-section bg-light ftco-bread">
 
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center">
+
+                    <div class="col-md-9 ftco-animate">
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Gallery</span></p>
+                        <h1 class="mb-3 bread">Galleries</h1>
+                    </div>
+
+
+                </div><p><?php
+                    session_start();
+                    echo $_SESSION['username'];?></p>
             </div>
-            <?php
-            ?>
 
-            <div class="all">
-                <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
-                    <input type='text' name='filename' placeholder='file name'>
-                    <input type='text' name='title' placeholder='file title'>
-                    <input type='text' name='fileDis' placeholder='image des'>
+        </section>
 
-                    <div class="container">
-                        <div class="content">
-                            <div class="box">
-                                <input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
-                                <label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17"  viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Choose a file&hellip;</strong></label>
+        <section class="ftco-section-2">
+            <div class="photograhy">
+                <div class="row no-gutters">
+                    <div class="col-md-4 ftco-animate">
+                        <a href="css/CSS/capture/images/image_1.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_1.jpg);">
+                            <div class="overlay"></div>
+                            <div class="text text-center">
+                                <h3>Work 01</h3>
+                                <span class="tag">Model</span>
                             </div>
-                        </div>
-                    <button type='submit' name='submit'>Upload</button>
-                </form>
+                        </a>
+                    </div>
+                    <?php
+                    include ('connection.php');
+                    $username=  $_SESSION['username'];
+                    $sql= "SELECT * FROM user_images WHERE username='$username' ORDER BY setImage DESC";
+                    // $my= mysqli_query($db,$sql);
+
+                    $tsmt= mysqli_stmt_init($db);
+
+                    if (! mysqli_stmt_prepare($tsmt,$sql)){
+                        echo "statement failed!";
+                    }else{
+
+                        $mo=mysqli_stmt_execute($tsmt);
+                        $result= mysqli_stmt_get_result($tsmt);
+//'C:/inetpub/wwwroot/1808234/CMM004-NewProject-master/CMM004-NewProject-master/img/'.'$imgName'.
+                        while ($row= mysqli_fetch_assoc($result)){
+                            $imageTit=$row['title']; //<- need to pass the data base name
+                            $imgName=$row['imageName'];  //<- need to pass real database name
+                            $imgDes=$row['fileDis'];    //<- need to pass real database name
+                            //here we will pass java script link
+                            ?>
+                            <div class="col-md-4 ftco-animate">
+                                <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/<?php echo $imgName;?>);">
+                                    <!-- <div style='background-image:url(css/CSS/capture/images/.$imgName); '></div>-->
+                                    <div class="overlay"></div>
+                                    <div class="text text-center">
+                                        <h3><?php echo $imageTit;?></h3>
+                                        <span class="tag"><?php echo $imgDes;?></span>
+                                    </div>
+                                    <!--<h3>'.$imageTit.'</h3>
+                                   <p>'.$imgDes.'</p>-->
+                                </a>
+                            </div>
+                        <?php }
+                    }
+                    ?>
+
+                    <!--<div class="col-md-4 ftco-animate"> <?php// echo $imgName;?>
+							<a href="images/image_12.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_12.jpg);">
+								<div class="overlay"></div>
+								<div class="text text-center">
+									<h3>Work 12</h3>
+									<span class="tag">Photography</span>
+								</div>
+							</a>
+						</div>-->
+                </div>
+
             </div>
-                <?php
-                if(isset($_SESSION['username'])){  }
-        ?>
+        </section>
+        <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container px-md-5">
 
 
-        </div>
-    </section>
-</main>
+                <div class="all">
+                    <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
+                        <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
+                        <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
+                        <input class="inputFile" type="text" name="fileDis" placeholder="image des"><br><br>
+                        <input class="inputFile" type="file" name="file">
+
+                        <button type="submit" name="submit">Upload</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </footer>
+    </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+<!-- loader -->
+<script src="css/CSS/capture/js/jquery.min.js"></script>
+<script src="css/CSS/capture/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="css/CSS/capture/js/popper.min.js"></script>
+<script src="css/CSS/capture/js/bootstrap.min.js"></script>
+<script src="css/CSS/capture/js/jquery.easing.1.3.js"></script>
+<script src="css/CSS/capture/js/jquery.waypoints.min.js"></script>
+<script src="css/CSS/capture/js/jquery.stellar.min.js"></script>
+<script src="css/CSS/capture/js/owl.carousel.min.js"></script>
+<script src="css/CSS/capture/js/jquery.magnific-popup.min.js"></script>
+<script src="css/CSS/capture/js/aos.js"></script>
+<script src="css/CSS/capture/js/jquery.animateNumber.min.js"></script>
+<script src="css/CSS/capture/js/bootstrap-datepicker.js"></script>
+<script src="css/CSS/capture/js/jquery.timepicker.min.js"></script>
+<script src="css/CSS/capture/js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="css/CSS/capture/js/google-map.js"></script>
+<script src="css/CSS/capture/js/main.js"></script>
+
 </body>
 </html>
