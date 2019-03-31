@@ -129,7 +129,7 @@
     margin-left: 20%;
     padding: 5px 10px;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px #717171;
 }
 .lable{
@@ -143,3 +143,46 @@
     border-radius: 10px;
     border: 1px #717171;
 }
+
+/*style for the upload fill field */
+
+.input-container {
+    /* margin: 3em auto;
+     max-width: 300px; */
+    height:40px;
+    width: 60%;
+    float: left;
+    margin-right: 50%;
+    margin-left: 20%;
+    background-color: #EDEDED;
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+}
+
+.input-container input[type='file']{
+
+    color: #000000;
+    background: #EDEDED;
+    min-height: 35px;
+    border: none;
+    height:38px;
+    float: initial;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+
+}
+
+.browse-btn:hover {
+    background: #4ec0b4;
+}
+
+/*input[type='file'] {
+    display: none;
+}
+
+input[type='file'] {
+    opacity: 0;
+    position: absolute;
+}
+

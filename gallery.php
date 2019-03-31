@@ -48,7 +48,9 @@
 <div id="colorlib-page">
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
-        <h1 id="colorlib-logo"><a href="index.html"><span class="flaticon-camera"></span>Capture</a></h1>
+        <h1 id="colorlib-logo"><a href="index.html"><span class="flaticon-camera"></span><?php
+                    session_start();
+                    echo $_SESSION['username'];?></a></h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li><a href="index.html">Profile</a></li>
@@ -70,26 +72,12 @@
                         <h1 class="mb-3 bread">Galleries</h1>
                     </div>
 
-
-                </div><p><?php
-                    session_start();
-                    echo $_SESSION['username'];?></p>
+                </div>
             </div>
 
         </section>
 
         <section class="ftco-section-2">
-            <div class="photograhy">
-                <div class="row no-gutters">
-                    <div class="col-md-4 ftco-animate">
-                        <a href="css/CSS/capture/images/image_1.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_1.jpg);">
-                            <div class="overlay"></div>
-                            <div class="text text-center">
-                                <h3>Work 01</h3>
-                                <span class="tag">Model</span>
-                            </div>
-                        </a>
-                    </div>
                     <?php
                     include ('connection.php');
                     $username=  $_SESSION['username'];
@@ -104,7 +92,6 @@
 
                         $mo=mysqli_stmt_execute($tsmt);
                         $result= mysqli_stmt_get_result($tsmt);
-//'C:/inetpub/wwwroot/1808234/CMM004-NewProject-master/CMM004-NewProject-master/img/'.'$imgName'.
                         while ($row= mysqli_fetch_assoc($result)){
                             $imageTit=$row['title']; //<- need to pass the data base name
                             $imgName=$row['imageName'];  //<- need to pass real database name
@@ -119,26 +106,12 @@
                                         <h3><?php echo $imageTit;?></h3>
                                         <span class="tag"><?php echo $imgDes;?></span>
                                     </div>
-                                    <!--<h3>'.$imageTit.'</h3>
-                                   <p>'.$imgDes.'</p>-->
                                 </a>
                             </div>
                         <?php }
                     }
                     ?>
 
-                    <!--<div class="col-md-4 ftco-animate"> <?php// echo $imgName;?>
-							<a href="images/image_12.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_12.jpg);">
-								<div class="overlay"></div>
-								<div class="text text-center">
-									<h3>Work 12</h3>
-									<span class="tag">Photography</span>
-								</div>
-							</a>
-						</div>-->
-                </div>
-
-            </div>
         </section>
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
@@ -149,7 +122,14 @@
                         <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="fileDis" placeholder="image des"><br><br>
-                        <input class="inputFile" type="file" name="file">
+                        <!--THIS THE START OF UPLOAD FILE STYLE -->
+
+                        <!--THIS THE END OF UPLOAD FILE STYLE -->
+                        <div class="input-container">
+                            <input  type="file"  name="file">
+                            <span ></span>
+                        </div><br><br>
+
 
                         <button type="submit" name="submit">Upload</button>
                     </form>
@@ -159,7 +139,26 @@
             </div>
         </footer>
     </div><!-- END COLORLIB-MAIN -->
-</div><!-- END COLORLIB-PAGE -->
+</div><!-- END COLORLIB-PAGE         <script>
+                            const uploadButton = document.querySelector('.browse-btn');
+                            const fileInfo = document.querySelector('.file-info');
+                            const realInput = document.getElementById('real-input');
+                            uploadButton.addEventListener('click', () => {
+                                realInput.click();
+                            });
+
+                            realInput.addEventListener('change', () => {
+                                const name = realInput.value.split(/\\|\//).pop();
+                                const truncated = name.length > 20
+                                    ? name.substr(name.length - 20)
+                                    : name;
+
+                                fileInfo.innerHTML = truncated;
+                            });
+                        </script> -->
+
+
+
 
 <!-- loader -->
 <script src="css/CSS/capture/js/jquery.min.js"></script>
@@ -182,3 +181,16 @@
 
 </body>
 </html>
+
+<!-- just for test and check
+<div class="photograhy">
+    <div class="row no-gutters">
+        <div class="col-md-4 ftco-animate">
+            <a href="css/CSS/capture/images/image_1.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_1.jpg);">
+                <div class="overlay"></div>
+                <div class="text text-center">
+                    <h3>Work 01</h3>
+                    <span class="tag">Model</span>
+                </div>
+            </a>
+        </div>-->
