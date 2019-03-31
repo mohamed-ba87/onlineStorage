@@ -46,6 +46,7 @@
 <body>
 
 <div id="colorlib-page">
+
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="index.html"><span class="flaticon-camera"></span><?php
@@ -59,26 +60,27 @@
             </ul>
         </nav>
     </aside> <!-- END COLORLIB-ASIDE -->
-
-
     <div id="colorlib-main">
+
         <section class="ftco-section bg-light ftco-bread">
+            <!--search bar -->
+            <div class="search-container">
+                <form action="#" method="post">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i> search</button>
+                </form>
+            </div>
 
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
 
                     <div class="col-md-9 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Gallery</span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">profile</a></span> <span>Gallery</span></p>
                         <h1 class="mb-3 bread">Galleries</h1>
                     </div>
 
 
-                </div><p><?php
-                    echo $_SESSION['username'];?></p>
-            </div>
-
         </section>
-
         <section class="ftco-section-2">
             <div class="photograhy">
                 <div class="row no-gutters">

@@ -65,7 +65,7 @@ if (isset($_POST['login'])){
                                 $rows = mysqli_fetch_assoc($result1);
                                 $_SESSION['first']=$rows['first_name'];
                                 $_SESSION['last']=$rows['last_name'];
-                                header('location : galleery.php?login=success');
+                                header('location : gallery.php?login=success');
                                 $_SESSION['allGood']= "you have logged in successfully";
                                 exit();
                             }
