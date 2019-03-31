@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="css/CSS/capture/css/style.css">
 
 
-    <link rel="stylesheet" href="css/css/gallery.css">
+    <link rel="stylesheet" href="css/gallery.css">
     <!-- this my staff just added-->
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -49,8 +49,8 @@
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="index.html"><span class="flaticon-camera"></span><?php
-                    session_start();
-                    echo $_SESSION['username'];?></a></h1>
+                session_start();
+                echo $_SESSION['username'];?></a></h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li><a href="index.html">Profile</a></li>
@@ -72,12 +72,16 @@
                         <h1 class="mb-3 bread">Galleries</h1>
                     </div>
 
-                </div>
+
+                </div><p><?php
+                    echo $_SESSION['username'];?></p>
             </div>
 
         </section>
 
         <section class="ftco-section-2">
+            <div class="photograhy">
+                <div class="row no-gutters">
                     <?php
                     include ('connection.php');
                     $username=  $_SESSION['username'];
@@ -100,7 +104,6 @@
                             ?>
                             <div class="col-md-4 ftco-animate">
                                 <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/<?php echo $imgName;?>);">
-                                    <!-- <div style='background-image:url(css/CSS/capture/images/.$imgName); '></div>-->
                                     <div class="overlay"></div>
                                     <div class="text text-center">
                                         <h3><?php echo $imageTit;?></h3>
@@ -112,6 +115,10 @@
                     }
                     ?>
 
+
+                </div>
+
+            </div>
         </section>
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
@@ -122,13 +129,7 @@
                         <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="fileDis" placeholder="image des"><br><br>
-                        <!--THIS THE START OF UPLOAD FILE STYLE -->
-
-                        <!--THIS THE END OF UPLOAD FILE STYLE -->
-                        <div class="input-container">
-                            <input  type="file"  name="file">
-                            <span ></span>
-                        </div><br><br>
+                      <div class="input-container"><input type="file" name="file"></div><br><br>
 
 
                         <button type="submit" name="submit">Upload</button>
@@ -139,26 +140,7 @@
             </div>
         </footer>
     </div><!-- END COLORLIB-MAIN -->
-</div><!-- END COLORLIB-PAGE         <script>
-                            const uploadButton = document.querySelector('.browse-btn');
-                            const fileInfo = document.querySelector('.file-info');
-                            const realInput = document.getElementById('real-input');
-                            uploadButton.addEventListener('click', () => {
-                                realInput.click();
-                            });
-
-                            realInput.addEventListener('change', () => {
-                                const name = realInput.value.split(/\\|\//).pop();
-                                const truncated = name.length > 20
-                                    ? name.substr(name.length - 20)
-                                    : name;
-
-                                fileInfo.innerHTML = truncated;
-                            });
-                        </script> -->
-
-
-
+</div><!-- END COLORLIB-PAGE -->
 
 <!-- loader -->
 <script src="css/CSS/capture/js/jquery.min.js"></script>
@@ -181,16 +163,3 @@
 
 </body>
 </html>
-
-<!-- just for test and check
-<div class="photograhy">
-    <div class="row no-gutters">
-        <div class="col-md-4 ftco-animate">
-            <a href="css/CSS/capture/images/image_1.jpg" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url(css/CSS/capture/images/image_1.jpg);">
-                <div class="overlay"></div>
-                <div class="text text-center">
-                    <h3>Work 01</h3>
-                    <span class="tag">Model</span>
-                </div>
-            </a>
-        </div>-->
