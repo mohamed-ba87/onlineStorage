@@ -84,7 +84,7 @@ if (isset($_POST['login'])){
 
         }
 }else{
-    header('location:  ../mainpage.php?login=error');
+    header('location: login.php?login=error');
     exit();
 }
 /*

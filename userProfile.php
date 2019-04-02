@@ -7,7 +7,7 @@ if ( !isset(  $_SESSION['username'])) {
     header('location: login.php');
     exit();
 }else{
-        $username=$_SESSION['username'];
+         $username=$_SESSION['username'];
         $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
         $result = mysqli_query($db,$sql);
         $check= mysqli_num_rows($result);
@@ -34,9 +34,31 @@ if ( !isset(  $_SESSION['username'])) {
         }
 }*/
 
+if (isset($_POST['profileUpload'])){
+    $username=$_SESSION['username'];
+
+
+    $targetDir="C:/inetpub/wwwroot/1808234/onlineStore/profileImage/";
+    $fileName = basename($_FILES['profileImg']['name']);
+    $fileTmpName = $_FILES['profileImg']['tmp_name'];
+    $folder = $targetDir.$fileName;
+    move_uploaded_file($fileTmpName, $folder);
+    $photosql= "UPDATE login SET photo='$fileName' WHERE username='$username'";
+
+    $result = mysqli_query($db,$photosql);
+
+
+}
+$username=$_SESSION['username'];
+    $sqlLog = "SELECT * FROM login WHERE username = '$username' ";
+    $resultLog = $db->query($sqlLog);
+
+    while ($row = $resultLog->fetch_assoc()) {
+        $_SESSION['pic']= $row['photo'];
+
+    }
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +92,7 @@ if ( !isset(  $_SESSION['username'])) {
 
     <link rel="stylesheet" href="css/gallery.css">
     <!-- this my staff just added-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -88,17 +110,20 @@ if ( !isset(  $_SESSION['username'])) {
 <div id="colorlib-page">
 
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo"><a href="userProfile.php"><span class="flaticon-camera"></span>
                 <?php
                 echo $_SESSION['username'];?></a></h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
-                <li><a href="userProfile.php">Profile</a></li>
-                <li class="colorlib-active" ><a href="gallery.php">Gallery</a></li>
+                <li class="colorlib-active"><a href="userProfile.php">Profile</a></li>
+                <li ><a href="gallery.php">Gallery</a></li>
 
             </ul>
         </nav>
+
+
     </aside> <!-- END COLORLIB-ASIDE -->
     <div id="colorlib-main">
 
@@ -107,78 +132,75 @@ if ( !isset(  $_SESSION['username'])) {
             <div class="search-container">
                 <form action="#" method="post">
                     <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i> search</button>
+                    <button type="submit" name="btn_search"><i class="fa fa-search"></i> search</button>
                 </form>
             </div>
+
 
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
 
                     <div class="col-md-9 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span>Gallery</span></p>
-                        <h1 class="mb-3 bread">Galleries</h1>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span>gallery</span></p>
+                        <h1 class="mb-3 bread"><?php
+                            echo  $_SESSION['username'];
+                            ?> Profile</h1>
                     </div>
 
 
         </section>
-        <section class="ftco-section-2">
-            <div class="photograhy">
-                <div class="row no-gutters">
-                    <?php
-                    $username=  $_SESSION['username'];
 
-                    $sql= "SELECT * FROM user_images WHERE username='$username' ORDER BY setImage DESC";
+        <div class="card">
 
-                    $tsmt= mysqli_stmt_init($db);
-                    if (! mysqli_stmt_prepare($tsmt,$sql)){
-                        echo "statement failed!";
-                    }else{
+        </div>
 
-                        $mo=mysqli_stmt_execute($tsmt);
-                        $result= mysqli_stmt_get_result($tsmt);
-                        while ($row= mysqli_fetch_assoc($result)){
-                            $imageTit=$row['title']; //<- need to pass the data base name
-                            $imgName=$row['imageName'];  //<- need to pass real database name
-                            $imgDes=$row['fileDis'];    //<- need to pass real database name
-                            //here we will pass java script link
-                            ?>
-                            <div class="col-md-4 ftco-animate">
-                                <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/<?php echo $imgName;?>);">
-                                    <div class="overlay"></div>
-                                    <div class="text text-center">
-                                        <h3><?php echo $imageTit;?></h3>
-                                        <span class="tag"><?php echo $imgDes;?></span>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php }
+        <section class="ftco-section-2" style="margin-left: 100px; margin-top: 50px">
+
+            <!--start of upload profile image-->
+            <div id="id2" class="modal">
+                <form class="modal-content animate" method="post" action="userProfile.php" enctype="multipart/form-data">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id2').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container">
+                        <input type="file" name ="profileImg">
+                        <button name="profileUpload" type="submit">Upload</button>
+                    </div>
+                    <div class="container" >
+                        <button type="button" onclick="document.getElementById('id2').style.display='none'" class="cancelbtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <script>
+                // Get the modal
+                var modal = document.getElementById('id2');
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
                     }
-                    ?>
+                }
+            </script>
+            <!--end of upload profile image-->
+            <?php
+            if (empty($_SESSION['pic'])){ ?>
+                <img style="width: 200px; height: 200px; cursor: pointer" alt="dif pic" class="profile_img"  src="profileImage/admin_profile.png" onclick="document.getElementById('id2').style.display='block'">
+            <?php }else{
+                $image = "profileImage/".$_SESSION['pic'];
+                ?>
+                <img style="width: 200px; height: 200px;cursor: pointer" alt="dif pic" class="profile_img"  src="<?php echo $image;?>" onclick="document.getElementById('id2').style.display='block'">
+            <?php } ?>
 
 
-                </div>
 
-            </div>
+            <h3>first name: <br><?php echo  $_SESSION['first']; ?></h3>
+            <h3>Last name : <br><?php echo   $_SESSION['last']; ?></h3>
+            <h3>Username : <br><?php echo  $_SESSION['username']; ?></h3>
+            <h3 class="title">Email : <br><?php echo $_SESSION['email'];?></h3>
         </section>
-        <footer class="ftco-footer ftco-bg-dark ftco-section">
-            <div class="container px-md-5">
 
-
-                <div class="all">
-                    <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
-                        <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
-                        <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
-                        <input class="inputFile" type="text" name="fileDis" placeholder="image des"><br><br>
-                      <div class="input-container"><input type="file" name="file"></div><br><br>
-
-
-                        <button type="submit" name="submit">Upload</button>
-                    </form>
-                </div>
-
-
-            </div>
-        </footer>
     </div><!-- END COLORLIB-MAIN -->
 </div><!-- END COLORLIB-PAGE -->
 
@@ -203,3 +225,12 @@ if ( !isset(  $_SESSION['username'])) {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+

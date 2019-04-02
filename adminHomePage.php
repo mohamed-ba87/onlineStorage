@@ -2,10 +2,60 @@
 session_start();
 include ('connection.php');
 /*
-if ( !isset( $_SESSION['user'])) {
+if ( !isset(  $_SESSION['username'])) {
     header('location: login.php');
     exit();
+}else{
+        $username=$_SESSION['username'];
+        $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
+        $result = mysqli_query($db,$sql);
+        $check= mysqli_num_rows($result);
+
+        if ($check !=1){
+            header('location: login.php?login=wrong_sql_NotThere');
+            exit();
+        }else {
+
+            if ($row = mysqli_fetch_assoc($result)) {
+                $type = $row['types'];
+                if ($row['types'] == 1) {
+                    header('location : adminHomePage.php?login=success');
+                    exit();
+                }
+            } else {
+
+                if ($row['types'] == 0) {
+                    header('location : login.php?login=success');
+                    exit();
+
+                }
+            }
+        }
 }*/
+if (isset($_POST['upload'])){
+    $username=$_SESSION['username'];
+
+
+    $targetDir="C:/inetpub/wwwroot/1808234/onlineStore/profileImage/";
+    $fileName = basename($_FILES['file']['name']);
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $folder = $targetDir.$fileName;
+    move_uploaded_file($fileTmpName, $folder);
+    $photosql= "UPDATE login SET photo='$fileName' WHERE username='$username'";
+
+    $result = mysqli_query($db,$photosql);
+
+    header('location : tradeProfile.php?upload=success');
+    exit();
+}
+
+$sqlLog = "SELECT * FROM login WHERE username = '$username' ";
+$resultLog = $db->query($sqlLog);
+
+while ($row = $resultLog->fetch_assoc()) {
+    $_SESSION['pic']= $row['photo'];
+
+}
 ?>
 
 
@@ -21,12 +71,6 @@ if ( !isset( $_SESSION['user'])) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script>
-        function my() {
-            var just = confirm('Are you sure want to cancel this process?');
-            if (just){return true;}
-        }
-    </script>
 </head>
 <body >
 <div class="">
@@ -34,9 +78,9 @@ if ( !isset( $_SESSION['user'])) {
     <center>
         <?php
         if (empty($_SESSION['pic'])){ ?>
-            <img class="profile_img"  src="img/admin_profile.png" onclick="document.getElementById('id01').style.display='block'">
+            <img class="profile_img"  src="profileImage/admin_profile.png" onclick="document.getElementById('id01').style.display='block'">
         <?php }else{
-            $image = "img/".$_SESSION['pic'];
+            $image = "profileImage/".$_SESSION['pic'];
             ?>
             <img class="profile_img" alt="upload pic" src="<?php echo $image;?>" onclick="document.getElementById('id01').style.display='block'">
        <?php } ?>
@@ -54,7 +98,7 @@ if ( !isset( $_SESSION['user'])) {
     -->
     <div id="id01" class="modal">
 
-        <form class="modal-content animate" action="#">
+        <form class="modal-content animate" action="adminHomePage.php" method="post" enctype="multipart/form-data">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
