@@ -101,6 +101,17 @@ h2{
     color: black;
     height: border-box;
 }*/
+.error {
+    width: 92%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+
 h2{
 
     margin-left: auto;
@@ -113,7 +124,7 @@ h2{
 }
 
 .input{
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0 10px 0;
 }
 
 .input input{
@@ -139,7 +150,7 @@ pointer-events: none;
 /*need this */
 .login-box{
     width: 400px;
-    height:380px;
+    height: auto;
     background: rgba(0,0,0,.5);
     color: white;
     top: 40%;

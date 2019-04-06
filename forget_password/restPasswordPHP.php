@@ -6,7 +6,7 @@ if (isset($_POST['rest_password'])){
     $selector=  bin2hex(random_bytes(8));
     $token=bin2hex(random_bytes(32));
 
-    $url= "here we put our like or url that we need to send the user to/?selector=".$selector."token".$token;
+    $url= "here we put our like or url that we need to send the user to/?selector=".$selector."token=".$token;
 
     $time= date("U")+1800;
 
@@ -29,7 +29,7 @@ if (isset($_POST['rest_password'])){
         }
     }
 
-    $my= "INSERT INTO restpasswoed (email,selector,token,expires) values (?,?,?,?)";
+    $my= "INSERT INTO restpasswoed (email,selector ,token,expire) values (?,?,?,?)";
     $in=mysqli_stmt_init($db);
     if ( ! mysqli_stmt_prepare($in,$my)){
         echo "there was an error";
@@ -45,7 +45,7 @@ if (isset($_POST['rest_password'])){
     $massage .="<p>Here is your password link, Please follow the information in the link !<br>";
     $massage .="<a href='.$url.'>'. $url.'</a></p>";
 
-    $header= "form:online Storage<onlinestorage.com>\r\n";
+    $header= "form:online Storage<onlineStorage.com>\r\n";
     $header .="content-type : text/html\r\n";
 
     email($to,$subject,$massage,$header);

@@ -162,24 +162,26 @@ $username=$_SESSION['username'];
                     <div class="imgcontainer">
                         <span onclick="document.getElementById('id2').style.display='none'" class="close" title="Close Modal">&times;</span>
                     </div>
-                    <div class="container">
+
                         <input type="file" name ="profileImg">
-                        <button name="profileUpload" type="submit">Upload</button>
-                    </div>
-                    <div class="container" >
-                        <button type="button" onclick="document.getElementById('id2').style.display='none'" class="cancelbtn">Cancel</button>
-                    </div>
+                        <button class="button1" name="profileUpload" type="submit">Upload</button>
+
+
+                        <button type="button" onclick="document.getElementById('id2').style.display='none'" class="#">Cancel</button>
+
                 </form>
             </div>
 
             <script>
                 // Get the modal
                 var modal = document.getElementById('id2');
+                var up = document.getElementById('update');
 
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
+                window.onclick = function(update) {
+                    if (  (update.target == modal) || (update.target == up)) {
                         modal.style.display = "none";
+                        up.style.display = "none";
+
                     }
                 }
             </script>
@@ -193,12 +195,62 @@ $username=$_SESSION['username'];
                 <img style="width: 200px; height: 200px;cursor: pointer" alt="dif pic" class="profile_img"  src="<?php echo $image;?>" onclick="document.getElementById('id2').style.display='block'">
             <?php } ?>
 
+            <?php
+
+            if (isset($_POST['update'])){
+
+                $username = $_SESSION['username'];
+                $first=mysqli_real_escape_string($db,$_POST['first']);
+                $last=mysqli_real_escape_string($db,$_POST['last']);
+                $uname=mysqli_real_escape_string($db,$_POST['username']);
+                $email=mysqli_real_escape_string($db,$_POST['email']);
+
+                if (! empty($first) ||! empty($last) || ! empty($uname) || ! empty($email)){
+                    $user= "UPDATE login SET username='$uname', email= '$email' WHERE username= '$username' ";
+                   // $users= mysqli_query($db,$user);
+                    $user1= "UPDATE user_info SET first_name='$first',last_name='$last' WHERE username='$username'";
+                    $users1= mysqli_query($db,$user1);
+                    $users= mysqli_query($db,$user);
+                   /// header('location : mainpage.php?updateUsername=success');
+                    exit();
+                }else{
+                    header('tradeProfile.php?error==username');
+                    exit();
+                }
+            }
+
+            ?>
+
+
+
+            <div id="update" class="modal">
+                <form class="modal-content animate" method="post" action="userProfile.php" >
+                        <span onclick="document.getElementById('update').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <label for="first"><b>first name</b></label>
+                        <input class="justMo" type="text" placeholder="First Name" name="first">
+                        <label for="last"><b>last name</b></label>
+                        <input class="justMo" type="text" placeholder="Last Name" name="last">
+
+                        <label for="username"><b>username</b></label>
+                        <input class="justMo" type="text" placeholder="username" name="username">
+
+                        <label for="email"><b>Email</b></label>
+                        <input class="justMo" type="text" placeholder="Email" name="email"><br><br>
+                        <button class="button1" type="submit" name="update">update</button><br><br>
+
+
+                        <button type="button" onclick="document.getElementById('update').style.display='none'" class="cancelbtn">Cancel</button>
+
+                </form>
+            </div>
+
 
 
             <h3>first name: <br><?php echo  $_SESSION['first']; ?></h3>
             <h3>Last name : <br><?php echo   $_SESSION['last']; ?></h3>
             <h3>Username : <br><?php echo  $_SESSION['username']; ?></h3>
             <h3 class="title">Email : <br><?php echo $_SESSION['email'];?></h3>
+            <button onclick="document.getElementById('update').style.display='block'" style="width:auto; float: left;">update</button>
         </section>
 
     </div><!-- END COLORLIB-MAIN -->

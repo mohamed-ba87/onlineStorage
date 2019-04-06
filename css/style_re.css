@@ -17,7 +17,7 @@ body{
 }
 .login-box-re{
     width: 400px;
-    height:670px;
+    height: auto;
     background: rgba(0,0,0,.5);
     color: #000000;
     top: 55%;
@@ -149,4 +149,15 @@ body{
     margin-right: 4%;
     margin-left: 4%;
     float: right;
+}
+
+.error {
+    width: 92%;
+    margin: 0px auto;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
 }

@@ -1,3 +1,5 @@
+<?php  session_start();
+include ('connection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +29,7 @@
         <div class="login-box">
             <form class="" method="post" action="loginsys.php">
                 <h2>Login</h2>
-
+                <?php include('errors.php');?>
                 <div class="input-box">
                     <input type="text" name="username" placeholder="" required>
                     <label>username/email</label>
@@ -37,8 +39,6 @@
                     <label>Password</label>
                 </div>
                 <?php
-                session_start();
-                include ('connection.php');
                 if (isset($_GET['new+pwd'])){
                     if ($_GET['new+pwd']=="passwordUpdated"){
                         echo "<p>your password been updated</p>";
@@ -49,7 +49,7 @@
                 <br>
                 <div >
                     <button class="login-box-btn" type="submit" name="login">Login</button>
-                    <p>click <a href="register.html">Here</a> to Register</p>
+                    <p>click <a href="register.php">Here</a> to Register</p>
                 </div>
 
             </form>

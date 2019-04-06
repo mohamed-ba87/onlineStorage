@@ -1,4 +1,5 @@
-
+<?php session_start();
+include ('connection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +32,8 @@
             <div  class="login-box-re">
                 <form  class="" method="post" action="registration.php">
                     <h2>Registration Form</h2>
+
+                    <?php include('errors.php'); ?>
                     <div class="input-box">
                         <input type="text" name="first" placeholder="first name" required>
                         <label>first name</label>

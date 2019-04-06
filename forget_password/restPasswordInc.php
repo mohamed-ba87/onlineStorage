@@ -17,7 +17,7 @@ if (isset($_POST['rest_pass_sub'])){
             exit();
         }else{
             $current= date("U");
-            $sql= "SELECT * FROM restpassword WHERE restpassword=? AND expires >= $current";
+            $sql= "SELECT * FROM restpassword WHERE selector = ? AND expires >= '$current'";
             $stmt=mysqli_stmt_init($db);
             if ( ! mysqli_stmt_prepare($stmt,$sql)){
                 echo "there was an error";
@@ -29,14 +29,14 @@ if (isset($_POST['rest_pass_sub'])){
 
                 $res= mysqli_stmt_get_result($stmt);
                 if (! $row= mysqli_fetch_assoc($res)){
-                    header('');
-                    echo "";
+                    header('../login.php?error=restPassword');
+                    echo " can not complete this process";
                     exit();
                 }else{
                     $tokenBin= hex2bin($validator);
                     $tokenCheck = password_verify($tokenBin,$row['token']);
                     if ($tokenCheck==false){
-                        echo "";
+                        echo "not verified information ";
                     } elseif ($tokenCheck ==true){
                         $tokenEmail= $row['email'];
                         $sqli= "SELECT * FROM login WHERE email=?";

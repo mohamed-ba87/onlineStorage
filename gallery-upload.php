@@ -29,7 +29,7 @@ if (isset($_POST['submit'])){
 
    if ($fileError===0){
 
-       if ($fileSize<350000){
+       if ($fileSize<250000){
            $imageName= $newFile . ".".uniqid("",true).".".$fileActExt;
 
            $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/userImages/". $imageName;
@@ -46,7 +46,13 @@ if (isset($_POST['submit'])){
                $result=  mysqli_query($db,$sql);
 
                      move_uploaded_file($fileTmpName,$fileDestination);
+               ?>
+                     <script>window.alert("the file was successfully uploaded")</script>
+      <?php
                      header('location : gallery.php?upload=success');
+
+
+             //  <script>window.alert("the file was successfully uploaded")</script>
 
 
            }
