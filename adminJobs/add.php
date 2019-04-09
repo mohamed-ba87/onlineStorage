@@ -11,12 +11,12 @@ if (isset($_POST['add_user'])){
 
     // checking time lool
     if (empty($first) || empty($last) || empty($pass1)  || empty($pass2)  || empty($username)  || empty($email)){
-        header('location : ../adminHomePage.php?empty');
+        header('location : ../adminHomePage.php?user=empty');
         exit();
     }else {
 
         if (! preg_match("/^[a-zA-Z]*$/", $first) || ! preg_match("/^[a-zA-Z]*$/", $last)) {
-            header('location : ../adminHomePage.php?first_last_name=error');
+            header('location : ../adminHomePage.php?first_last=error');
             exit();
         } else {
             if (! filter_var($email,FILTER_VALIDATE_EMAIL)){
@@ -45,7 +45,9 @@ if (isset($_POST['add_user'])){
                         $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                         mysqli_query($db,$sql_user);
                         $_SESSION['user']= $username;
+                            $_SESSION['success'] = "new Admin was added successfully"." ".$username;
                         header('location : adminHomePage.php?new_user=added');
+
                         }else{
                             if ( preg_match('/^[Add User]*$/',$type)){
                             $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";

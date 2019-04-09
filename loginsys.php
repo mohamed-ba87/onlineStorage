@@ -24,7 +24,7 @@ if (isset($_POST['login'])){
         $check= mysqli_num_rows($result);
 
         if ($check !=1){
-            array_push($errors, "username/email not right...!");
+            array_push($errors, "");
 
             header('location: login.php?login=wrong_sql_NotThere');
             exit();
@@ -38,7 +38,7 @@ if (isset($_POST['login'])){
 
                             array_push($errors, "Was wrong Password");
 
-                            header('location: login.php?password_wrong_user');
+                            header('location: login.php?pass=password_wrong_user');
                             exit();
                         }elseif ($password2==true){
                             $_SESSION['username']=$row['username'];
@@ -52,8 +52,8 @@ if (isset($_POST['login'])){
                             $_SESSION['last']=$rows['last_name'];
                             header('location : adminHomePage.php?login=success');
                             $_SESSION['allGood']= "you have logged in successfully";
-
                             header('location : adminHomePage.php?login=success');
+                          //  header('location : adminHomePage.php?login=success');
                             exit();
                         }
                     }else{
@@ -75,7 +75,7 @@ if (isset($_POST['login'])){
                                 $rows = mysqli_fetch_assoc($result1);
                                 $_SESSION['first']=$rows['first_name'];
                                 $_SESSION['last']=$rows['last_name'];
-                                header('location : gallery.php?login=success');
+                                header('location : userProfile.php?login=success');
                                 $_SESSION['allGood']= "you have logged in successfully";
                                 exit();
                             }

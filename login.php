@@ -29,7 +29,32 @@ include ('connection.php');?>
         <div class="login-box">
             <form class="" method="post" action="loginsys.php">
                 <h2>Login</h2>
-                <?php include('errors.php');?>
+                <?php
+                if (isset($_GET['registration'])){
+                    if ($_GET['registration']=="success"){?>
+                        <div class="success">
+                            <?php echo "you registration was success"."<br><br>"."Please us your login details to login... ";?>
+                        </div>
+                <?php }
+                }
+                ?>
+
+                <?php if (isset($_GET['login'])){
+                    if ($_GET['login']=="wrong_empty"){
+                        echo "<div class='error'>Sorry username or password was empty,Please try again..!</div>";
+                    }
+                }?>
+                <?php if (isset($_GET['login'])){
+                    if ($_GET['login']=="wrong_sql_NotThere"){
+                        echo "<div class='error'>Sorry username/email not right...!</div>";
+                    }
+                }?>
+
+                <?php if (isset($_GET['pass'])){
+                    if ($_GET['pass']=="password_wrong_user"){
+                        echo "<div class='error'>Was wrong Password, Please try again...!</div>";
+                    }
+                }?>
                 <div class="input-box">
                     <input type="text" name="username" placeholder="" required>
                     <label>username/email</label>
@@ -45,7 +70,7 @@ include ('connection.php');?>
                     }
                 }
                 ?>
-                <a class="a" href="forget_password/restPasswordPage.html">forget Password?</a>
+                <a class="a" href="forget_password/restPasswordPage.php">forget Password?</a>
                 <br>
                 <div >
                     <button class="login-box-btn" type="submit" name="login">Login</button>

@@ -263,3 +263,15 @@ pointer-events: none;
 .a:hover {
     color: mediumturquoise;
 }
+
+.success {
+    width: 92%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #09a9a5;
+    color: #4ba909;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+

@@ -3,8 +3,8 @@ session_start();
 include "../connection.php";
 if (isset($_POST['rest_password'])){
 
-    $selector=  bin2hex(random_bytes(8));
-    $token=bin2hex(random_bytes(32));
+    $selector=  bin2hex(8);
+    $token=bin2hex(32);
 
     $url= "here we put our like or url that we need to send the user to/?selector=".$selector."token=".$token;
 
@@ -48,8 +48,8 @@ if (isset($_POST['rest_password'])){
     $header= "form:online Storage<onlineStorage.com>\r\n";
     $header .="content-type : text/html\r\n";
 
-    email($to,$subject,$massage,$header);
-
+    mail($to,$subject,$massage,$header);
+exit();
     header('location : ../login.php');
 
 }else{

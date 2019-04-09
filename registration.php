@@ -11,17 +11,24 @@ if (isset($_POST['register'] )){
     $email= mysqli_real_escape_string($db,$_POST['email']);
     $pass1 = mysqli_real_escape_string($db,$_POST['password']);
     $pass2 = mysqli_real_escape_string($db,$_POST['password_con']);
-
+    $que1 = mysqli_real_escape_string($db,$_POST['q1']);
+    $que2 = mysqli_real_escape_string($db,$_POST['q2']);
+   $ans1 = mysqli_real_escape_string($db,$_POST['ans2']);
+   $ans2 = mysqli_real_escape_string($db,$_POST['ans1']);
 
     if (empty($first)) { array_push($errors, "first name is required"); }
     if (empty($last)) { array_push($errors, "last name is required"); }
     if (empty($username)) { array_push($errors, "Username is required"); }
     if (empty($email)) { array_push($errors, "Email is required"); }
     if (empty($pass1)) { array_push($errors, "Password is required"); }
+    if (empty($que1)) { array_push($errors, "choose question is required"); }
+    if (empty($que2)) { array_push($errors, "choose question is required"); }
+    if (empty($ans1)) { array_push($errors, "answer is required"); }
+    if (empty($ans1)) { array_push($errors, "answer is required"); }
 
     // checking time lool
-    if (empty($first) || empty($last)   || empty($username)  || empty($email) || empty($pass1)  || empty($pass2)){
-        header('location: register.php?empty');
+    if (empty($first) || empty($last)   || empty($username)  || empty($email) || empty($pass1)  || empty($pass2) ){
+        header('location: register.php?user=empty');
         exit();
     }else {
 
@@ -48,17 +55,35 @@ if (isset($_POST['register'] )){
                             header('location: register.php?password=not_match');
                             exit();
                         }else{
+                            $query = "SELECT * FROM question WHERE id = '$que1' ";
+                            $result1 = mysqli_query($db,$query);
+
+                            while ($rows = mysqli_fetch_assoc($result1)) {
+                                            $qid1  = $rows['id'];
+                                        }
+                            $query2 = "SELECT *  FROM question WHERE id = '$que2' ";
+                            $result2 = mysqli_query($db,$query2);
+                            while ($row= mysqli_fetch_assoc($result2)) {
+                                $qid2 = $row['id'];
+                            }
+                            // start of inserting the security questions and the answers to answers table
+                            $answer1 = password_hash($ans1, PASSWORD_DEFAULT);
+                            $answer2 = password_hash($ans2, PASSWORD_DEFAULT);
+
+                            $sql_user= "INSERT INTO answers (username,question1_id ,answer_q1,question2_id,answer_q2) VALUES ('$username', '$qid1','$answer1','$qid2','$answer2')";
+                            mysqli_query($db,$sql_user);
+                            // end of inserting the security questions and the answers to answers table
+
                             $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                             // insert the login data into login table
                             $sql_login= "INSERT INTO  login (username, email, password, types) VALUES ('$username','$email','$password',0)";
                             $res=mysqli_query($db,$sql_login);
 
-                            // insert the tradesman data into tradesman table
+                            // insert the user data into user information table (user/admin)
                             $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                             mysqli_query($db,$sql_user);
-
                             $_SESSION['user']= $username;
-                            header('location : register.php?login=success');
+                            header('location : login.php?registration=success');
 
                         }
                     }

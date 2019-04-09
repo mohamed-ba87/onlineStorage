@@ -2,11 +2,12 @@
 <?php
 session_start();
 include ('connection.php');
-/*
+
 if ( !isset(  $_SESSION['username'])) {
     header('location: login.php');
     exit();
-}else{
+}/*
+else{
          $username=$_SESSION['username'];
         $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
         $result = mysqli_query($db,$sql);
@@ -63,7 +64,7 @@ $username=$_SESSION['username'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Gallery</title>
+    <title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -136,14 +137,23 @@ $username=$_SESSION['username'];
                 </form>
             </div>
 
+            <br><br><br><br>
+            <!--start for the login out button -->
+            <div class="logout">
+                <form action="log-out.php" method="post" onclick="return confirm('Are sure you want to LOG OUT?')">
+                    <button type="submit" name="logout">Log out</button>
+                </form>
+            </div>
+            <!--end for the login out button -->
+
 
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
 
                     <div class="col-md-9 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span>gallery</span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span><a href="userProfile.php">gallery</a></span></p>
                         <h1 class="mb-3 bread"><?php
-                            echo  $_SESSION['username'];
+                            echo  $_SESSION['username']." ";
                             ?> Profile</h1>
                     </div>
 
@@ -159,15 +169,14 @@ $username=$_SESSION['username'];
             <!--start of upload profile image-->
             <div id="id2" class="modal">
                 <form class="modal-content animate" method="post" action="userProfile.php" enctype="multipart/form-data">
-                    <div class="imgcontainer">
+
                         <span onclick="document.getElementById('id2').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    </div>
 
+                    <div class="modal-content">
                         <input type="file" name ="profileImg">
-                        <button class="button1" name="profileUpload" type="submit">Upload</button>
-
-
-                        <button type="button" onclick="document.getElementById('id2').style.display='none'" class="#">Cancel</button>
+                    </div>
+                    <button class="button1" name="profileUpload" type="submit">Upload</button><br><br><br><br>
+                        <button type="button" onclick="document.getElementById('id2').style.display='none'" class="cancelbtn">Cancel</button><br><br>
 
                 </form>
             </div>
@@ -177,8 +186,8 @@ $username=$_SESSION['username'];
                 var modal = document.getElementById('id2');
                 var up = document.getElementById('update');
 
-                window.onclick = function(update) {
-                    if (  (update.target == modal) || (update.target == up)) {
+                window.onclick = function(just) {
+                    if (  (just.target == modal) || (just.target == up)) {
                         modal.style.display = "none";
                         up.style.display = "none";
 
@@ -226,21 +235,22 @@ $username=$_SESSION['username'];
             <div id="update" class="modal">
                 <form class="modal-content animate" method="post" action="userProfile.php" >
                         <span onclick="document.getElementById('update').style.display='none'" class="close" title="Close Modal">&times;</span>
+<div class="modal-content">
                         <label for="first"><b>first name</b></label>
                         <input class="justMo" type="text" placeholder="First Name" name="first">
                         <label for="last"><b>last name</b></label>
                         <input class="justMo" type="text" placeholder="Last Name" name="last">
 
-                        <label for="username"><b>username</b></label>
+                        <label  for="username"><b>username</b></label>
                         <input class="justMo" type="text" placeholder="username" name="username">
 
-                        <label for="email"><b>Email</b></label>
+                        <label  for="email"><b>Email</b></label>
                         <input class="justMo" type="text" placeholder="Email" name="email"><br><br>
                         <button class="button1" type="submit" name="update">update</button><br><br>
 
 
-                        <button type="button" onclick="document.getElementById('update').style.display='none'" class="cancelbtn">Cancel</button>
-
+                        <button type="button" onclick="document.getElementById('update').style.display='none'" class="cancelbtn">Cancel</button><br><br>
+</div>
                 </form>
             </div>
 
@@ -250,7 +260,7 @@ $username=$_SESSION['username'];
             <h3>Last name : <br><?php echo   $_SESSION['last']; ?></h3>
             <h3>Username : <br><?php echo  $_SESSION['username']; ?></h3>
             <h3 class="title">Email : <br><?php echo $_SESSION['email'];?></h3>
-            <button onclick="document.getElementById('update').style.display='block'" style="width:auto; float: left;">update</button>
+            <button class="button1" onclick="document.getElementById('update').style.display='block'" style="width:auto; float: left;">update</button>
         </section>
 
     </div><!-- END COLORLIB-MAIN -->

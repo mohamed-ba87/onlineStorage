@@ -230,9 +230,11 @@
 
 
 .justMo{
-    width: 100%;
+    width:100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    /*margin: 8px 0;*/
+    margin-left: auto;
+    margin-right: auto;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -243,14 +245,13 @@
 .button1 {
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
-    margin-right: auto;
-    margin-left: auto;
+    padding: 10px 15px;
+   float: left;
     border: none;
     cursor: pointer;
-    width: 50%;
+    width: 45%;
     border-radius: 10px 10px 10px 10px;
-    float: left;
+
 }
 
 .button1:hover {
@@ -259,14 +260,13 @@
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-    margin-right: auto;
-    margin-left: auto;
+    float: left;
     background-color: #f44336;
     color: white;
-    padding: 14px 20px;
+    padding: 10px 15px;
     border: none;
     cursor: pointer;
-    width: 50%;
+    width: 45%;
     border-radius: 10px 10px 10px 10px;
 
 
@@ -302,7 +302,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 50%; /* Could be more or less, depending on screen size */
     height: auto;
 }
 
@@ -348,3 +348,19 @@ span.psw {
         width: 100%;
     }
 }
+
+.logout button {
+    color: white;
+    padding: 14px 20px;
+    margin-left: auto;
+    border: none;
+    cursor: pointer;
+    float: right;
+    width: auto;
+    margin-right: 15px;
+   background-color: red;
+    border-radius: 10px 10px 10px 10px;
+
+
+}
+

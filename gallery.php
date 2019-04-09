@@ -2,11 +2,12 @@
 <?php
 session_start();
 include ('connection.php');
-/*
+
 if ( !isset(  $_SESSION['username'])) {
     header('location: login.php');
     exit();
-}else{
+}/*
+else{
         $username=$_SESSION['username'];
         $sql= "SELECT * FROM login WHERE username='$username' OR email= '$username'";
         $result = mysqli_query($db,$sql);
@@ -104,19 +105,29 @@ if ( !isset(  $_SESSION['username'])) {
 
         <section class="ftco-section bg-light ftco-bread">
             <!--search bar -->
-            <div class="search-container">
+           <!-- <div class="search-container">
                 <form action="#" method="post">
                     <input type="text" placeholder="Search.." name="search">
                     <button type="submit"><i class="fa fa-search"></i> search</button>
                 </form>
+            </div>-->
+<br><br><br><br>
+            <!--start for the login out button -->
+            <div class="logout">
+                <form action="log-out.php" method="post" onclick="return confirm('Are sure you want to LOG OUT?')">
+                    <button type="submit" name="logout">Log out</button>
+                </form>
             </div>
+            <!--end for the login out button -->
+
 
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
 
                     <div class="col-md-9 ftco-animate">
                         <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span>Gallery</span></p>
-                        <h1 class="mb-3 bread">Galleries</h1>
+                        <h1 class="mb-3 bread"><?php
+                            echo $_SESSION['username'];?>  Galleries</h1>
                     </div>
 
 
