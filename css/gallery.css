@@ -243,13 +243,14 @@
 
 /* Set a style for all buttons */
 .button1 {
-    background-color: #4CAF50;
+    float: left;
+    background-color: rgba(21, 140, 29, 0.97);
     color: white;
     padding: 10px 15px;
-   float: left;
     border: none;
     cursor: pointer;
-    width: 45%;
+    width: 40%;
+    margin: auto;
     border-radius: 10px 10px 10px 10px;
 
 }
@@ -266,10 +267,12 @@
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    width: 45%;
+    width: 40%;
+    margin: auto;
     border-radius: 10px 10px 10px 10px;
-
-
+}
+.cancelbtn:hover  {
+    opacity: 0.8;
 }
 
 /* Center the image and position the close button */

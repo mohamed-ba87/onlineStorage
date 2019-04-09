@@ -52,8 +52,8 @@ if (isset($_POST['login'])){
                             $_SESSION['last']=$rows['last_name'];
                             header('location : adminHomePage.php?login=success');
                             $_SESSION['allGood']= "you have logged in successfully";
-                            header('location : adminHomePage.php?login=success');
-                          //  header('location : adminHomePage.php?login=success');
+                            //header('location : adminHomePage.php?login=success');
+                            header('location:adminHomePage.php?login=success');
                             exit();
                         }
                     }else{

@@ -66,18 +66,20 @@ if (isset($_POST['register'] )){
                             while ($row= mysqli_fetch_assoc($result2)) {
                                 $qid2 = $row['id'];
                             }
+
+                            $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
+                            // insert the login data into login table
+                            $sql_login= "INSERT INTO  login (username, email, password, types,photo) VALUES ('$username','$email','$password',0,'')";
+                            $res=mysqli_query($db,$sql_login);
+                           // exit();
                             // start of inserting the security questions and the answers to answers table
                             $answer1 = password_hash($ans1, PASSWORD_DEFAULT);
                             $answer2 = password_hash($ans2, PASSWORD_DEFAULT);
 
                             $sql_user= "INSERT INTO answers (username,question1_id ,answer_q1,question2_id,answer_q2) VALUES ('$username', '$qid1','$answer1','$qid2','$answer2')";
-                            mysqli_query($db,$sql_user);
+                           $resu= mysqli_query($db,$sql_user);
                             // end of inserting the security questions and the answers to answers table
 
-                            $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
-                            // insert the login data into login table
-                            $sql_login= "INSERT INTO  login (username, email, password, types) VALUES ('$username','$email','$password',0)";
-                            $res=mysqli_query($db,$sql_login);
 
                             // insert the user data into user information table (user/admin)
                             $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";

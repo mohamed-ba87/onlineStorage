@@ -246,8 +246,8 @@ $username=$_SESSION['username'];
 
                         <label  for="email"><b>Email</b></label>
                         <input class="justMo" type="text" placeholder="Email" name="email"><br><br>
-                        <button class="button1" type="submit" name="update">update</button><br><br>
 
+    <button class="button1" type="submit" name="update">update</button><br><br>
 
                         <button type="button" onclick="document.getElementById('update').style.display='none'" class="cancelbtn">Cancel</button><br><br>
 </div>

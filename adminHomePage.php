@@ -1,9 +1,8 @@
 <?php
 session_start();
 include ('connection.php');
-
 if ( !isset(  $_SESSION['username'])) {
-    header('location: login.php');
+    header('location: login.php?noway');
     exit();
 }/*
 else{
@@ -226,20 +225,21 @@ while ($rows = $result->fetch_assoc()) {
         </div>
         <!-- add new user end here-->
 
-
         <!-- delete user start here-->
         <?php if (isset($_GET['user'])){
             if ($_GET['user']=="not_existed"){
                 echo "<div class='error'>user not in our record...!</div>";
             }
         }?>
+
         <?php if (isset($_GET['delete'])){
-            if ($_GET['delete']=="com"){?>
-        <div class="error">
-            <?php echo "user was deleted";?>
-        </div>
-            <?php}
+            if ($_GET['delete']=="com"){
+                echo "<div class='error'>
+                   user was deleted
+                </div>";
+            }
         }?>
+
         <div id="delete" class="modal">
             <div>
                 <form class="modal-content animate"  action="adminJobs/delete.php" onsubmit="return confirm('Are Sure you?')"  method="post">
@@ -256,7 +256,6 @@ while ($rows = $result->fetch_assoc()) {
         <!-- delete user end here-->
 
 
-
         <!-- search for a user start here-->
         <div id="search" class="modal">
             <div class="search-container">
@@ -269,24 +268,23 @@ while ($rows = $result->fetch_assoc()) {
                 </form>
             </div>
         </div>
-      <?php
-      if (isset($_GET['search'])) {
-          if ($_GET['search']=="nothing") {
-              echo "Result not found..!";
-              exit();
-          } else {
-              echo $_SESSION['result'] . "<br>.<br>";
-              ?>
-              <h3>Username: <br><?php echo $_SESSION['uname']; ?></h3><br><br>
-              <h3>Email:<br><?php echo $_SESSION['em']; ?></h3><br><br>
-              <h3>first name: <br><?php echo $_SESSION['first']; ?></h3><br><br>
-              <h3>Last name: <br><?php echo $_SESSION['last']; ?></h3><br><br>
+        <?php
+        if (isset($_GET['search'])) {
+            if ($_GET['search']=="nothing") {
+                echo "Result not found..!";
+                exit();
+            } else {
+                echo $_SESSION['result'] . "<br>.<br>";
+                ?>
+                <h3>Username: <br><?php echo $_SESSION['uname']; ?></h3><br><br>
+                <h3>Email:<br><?php echo $_SESSION['em']; ?></h3><br><br>
+                <h3>first name: <br><?php echo $_SESSION['first']; ?></h3><br><br>
+                <h3>Last name: <br><?php echo $_SESSION['last']; ?></h3><br><br>
 
-              <?php
-          }
-      }?>
+                <?php
+            }
+        }?>
         <!-- search for a user end here with php code-->
-
 
     </article>
 </section>
