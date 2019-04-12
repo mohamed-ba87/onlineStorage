@@ -47,7 +47,7 @@ if (isset($_POST['upload'])){
 
     $result = mysqli_query($db,$photosql);
 
-    header('location : tradeProfile.php?upload=success');
+    header('location : adminHomePage.php?upload=success');
     exit();
 }
 
@@ -209,7 +209,7 @@ while ($rows = $result->fetch_assoc()) {
 
                     <div>
                         <label for="user_type">Type of User</label>
-                        <select name='user_type' >
+                        <select name="user_type" >
                             <option></option>
                             <option>Add User</option>
                             <option>Add Administrator</option>
@@ -268,21 +268,35 @@ while ($rows = $result->fetch_assoc()) {
                 </form>
             </div>
         </div>
+
         <?php
         if (isset($_GET['search'])) {
-            if ($_GET['search']=="nothing") {
-                echo "Result not found..!";
-                exit();
-            } else {
-                echo $_SESSION['result'] . "<br>.<br>";
-                ?>
-                <h3>Username: <br><?php echo $_SESSION['uname']; ?></h3><br><br>
-                <h3>Email:<br><?php echo $_SESSION['em']; ?></h3><br><br>
-                <h3>first name: <br><?php echo $_SESSION['first']; ?></h3><br><br>
-                <h3>Last name: <br><?php echo $_SESSION['last']; ?></h3><br><br>
+        if ($_GET['search']=="nothing") {?>
+            <script>
+                alert("<?php echo 'Result not found..!'?>");
+            </script>
+        <?php
+        exit();
+        }
+        if ($_GET['search']=="empty"){?>
+            <script>
+                alert("<?php echo 'search field was empty, please enter the username or email...!';?>");
+            </script>
+        <?php
+        exit();
+        }
+        if ($_GET['search']=="success"){?>
 
-                <?php
-            }
+                <?php echo $_SESSION['result'];?>
+        <br><br><h3>Username:</h3><br>
+            <?php echo $_SESSION['uname']; ?><br><br>
+            <h3>Email:</h3><?php echo $_SESSION['em']; ?><br><br>
+            <h3>First Name:</h3><?php echo $_SESSION['first']; ?><br><br>
+            <h3>Last Name:</h3><?php echo $_SESSION['last']; ?><br><br>
+            <h3>Number Of Images:</h3><?php echo $_SESSION['size']; ?>
+
+            <?php exit();
+        }
         }?>
         <!-- search for a user end here with php code-->
 

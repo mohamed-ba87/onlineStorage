@@ -2,7 +2,6 @@
 session_start();
 include ('../connection.php');
 if (isset($_POST['rest_pass_sub'])){
-
     $selector= mysqli_real_escape_string($db,$_POST['selector']);
     $validator= mysqli_real_escape_string($db,$_POST['validator']);
     $pass1= mysqli_real_escape_string($db,$_POST['pwd']);

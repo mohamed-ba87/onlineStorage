@@ -71,10 +71,10 @@ if (isset($_POST['login'])){
                                 $user= $row['username'];
                                 $sql1= "SELECT * FROM user_info WHERE username='$user'";
                                 $result1 = mysqli_query($db,$sql1);
-                                $check1= mysqli_num_rows($result1);
-                                $rows = mysqli_fetch_assoc($result1);
-                                $_SESSION['first']=$rows['first_name'];
-                                $_SESSION['last']=$rows['last_name'];
+                                while ($rows = mysqli_fetch_assoc($result1)){
+                                    $_SESSION['first']=$rows['first_name'];
+                                    $_SESSION['last']=$rows['last_name'];
+                                }
                                 header('location : userProfile.php?login=success');
                                 $_SESSION['allGood']= "you have logged in successfully";
                                 exit();

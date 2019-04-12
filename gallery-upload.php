@@ -38,32 +38,38 @@ if (isset($_POST['submit'])){
                header('location gallery.php?upload=empty');
                exit();
            }else{
-               $select= "SELECT * FROM user_images";
+               $select= "SELECT * FROM user_images WHERE username = '$username'";
                $ck=mysqli_query($db,$select);
                  $rowsNum= mysqli_num_rows($ck);
+             //  $_SESSION['size']= $rowsNum;
+                 if ($rowsNum <21){
                  $setImage= $rowsNum+1;
+                 $_SESSION['size']= $rowsNum;
+            //   print_r($rowsNum);
+             //  exit();
                  $sql= "INSERT INTO user_images (username,title,fileDis,imageName,setImage) VALUES ('$username' ,'$title' , '$fileDis' , '$imageName' , '$setImage')";
                $result=  mysqli_query($db,$sql);
 
                      move_uploaded_file($fileTmpName,$fileDestination);
                ?>
-                     <script>window.alert("the file was successfully uploaded")</script>
+
       <?php
                      header('location : gallery.php?upload=success');
-
-
-             //  <script>window.alert("the file was successfully uploaded")</script>
-
+                     exit();
+                 }else{
+                     header('location : gallery.php?upload=full');
+                     exit();
+                 }
 
            }
 
        }else{
+           header('location : gallery.php?upload=big');
+           exit();
            echo "the image size is too big!";
        }
    }else{
-       echo "you had an error!";
-
-
-
+       header('location : gallery.php?upload=error');
+       exit();
    }
 }

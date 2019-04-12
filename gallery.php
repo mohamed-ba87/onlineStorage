@@ -174,7 +174,37 @@ else{
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
 
+<?php
 
+if (isset($_GET['upload'])){
+
+if ($_GET['upload']=="=empty"){?>
+    <script>
+        alert(<?php echo "images title or description is empty,\n\nPlease make sure you fill all the field..!"?>);
+    </script>
+<?php }
+
+
+    if ($_GET['upload']=="=full"){?>
+        <script>
+            alert("<?php echo 'Sorry you can not upload more images,because Your storage if full..!';?>");
+        </script>
+   <?php }
+   if ($_GET['upload']=="=success"){?>
+        <script>
+            alert("<?php echo 'Your file was uploaded successfully..!'?>");
+        </script>
+    <?php }
+
+
+    if ($_GET['upload']=="error"){?>
+        <script>
+        alert("<?php echo 'Result not found..!'?>");
+        </script>
+  <?php  }
+}
+
+?>
                 <div class="all">
                     <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
                         <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>

@@ -208,7 +208,7 @@
 }
 
 .search-container button:hover {
-    background: #000000;
+    background: rgba(93, 255, 243, 0.45);
 }
 
 @media screen and (max-width: 600px) {
