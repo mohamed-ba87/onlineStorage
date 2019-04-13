@@ -172,7 +172,12 @@ while ($rows = $result->fetch_assoc()) {
                 echo "<div class='error'>Sorry username/email was taken try again..!</div>";
             }
         }?>
+        <?php if (isset($_GET['new_user'])){
+            if ($_GET['new_user']=="added"){
+                echo "You've successfully added the new user "." ".$_SESSION['user_add'];
+        }
 
+        }?>
         <div id="add" class="modal">
             <form class="modal-content animate"   action="adminJobs/add.php" onsubmit="return confirm('Are Sure you want to add this user?')" method="post">
                 <span onclick="document.getElementById('add').style.display='none'" class="close" title="Close Modal">&times;</span>
