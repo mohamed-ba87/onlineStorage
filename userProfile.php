@@ -1,12 +1,9 @@
-
 <?php
 session_start();
 include ('connection.php');
-
 if ( !isset($_SESSION['username'])) {
     header('location: login.php');
     exit();
-
 }
 /*
 else{
@@ -42,52 +39,35 @@ if (isset($_POST['profileUpload'])){
     $folder = $targetDir.$fileName;
     move_uploaded_file($fileTmpName, $folder);
     $photosql= "UPDATE login SET photo='$fileName' WHERE username='$username'";
-
     $result = mysqli_query($db,$photosql);
-
-
 }
-$username=$_SESSION['username'];
+    $username=$_SESSION['username'];
     $sqlLog = "SELECT * FROM login WHERE username = '$username' ";
     $resultLog = $db->query($sqlLog);
-
     while ($row = $resultLog->fetch_assoc()) {
         $_SESSION['pic']= $row['photo'];
-
     }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
-
     <link rel="stylesheet" href="css/CSS/capture/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/CSS/capture/css/animate.css">
-
     <link rel="stylesheet" href="css/CSS/capture/css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/CSS/capture/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/CSS/capture/css/magnific-popup.css">
-
     <link rel="stylesheet" href="css/CSS/capture/css/aos.css">
-
     <link rel="stylesheet" href="css/CSS/capture/css/ionicons.min.css">
-
     <link rel="stylesheet" href="css/CSS/capture/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/CSS/capture/css/jquery.timepicker.css">
-
-
     <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/style.css">
-
-
     <link rel="stylesheet" href="css/gallery.css">
     <!-- this my staff just added-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -117,7 +97,8 @@ $username=$_SESSION['username'];
             <ul>
                 <li class="colorlib-active"><a href="userProfile.php">Profile</a></li>
                 <li ><a href="gallery.php">Gallery</a></li>
-
+                <li><a href="messages.php">send Message</a></li>
+                <li><a href="inbox.php">Index</a></li>
             </ul>
         </nav>
 
@@ -133,7 +114,6 @@ $username=$_SESSION['username'];
                     <button type="submit" name="btn_search_user"><i class="fa fa-search"></i> search</button>
                 </form>
             </div>
-
             <br><br><br><br>
             <!--start for the login out button -->
             <div class="logout">
@@ -142,56 +122,41 @@ $username=$_SESSION['username'];
                 </form>
             </div>
             <!--end for the login out button -->
-
-
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
 
                     <div class="col-md-9 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span><a href="userProfile.php">gallery</a></span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">profile</a></span> <span><a href="gallery.php">gallery</a></span> <span><a href="messages.php">send message</a></span> <span><a href="inbox.php">inbox</a></span></p>
                         <h1 class="mb-3 bread"><?php
                             echo  $_SESSION['username']." ";
                             ?> Profile</h1>
                     </div>
-
                     <?php
                     if (isset($_GET['userU'])){
                         if ($_GET['userU']=="good"){
                             echo "<div class='error'>your Profile was Updated..</div>";
-
                         }else{
                              if ($_GET['userU']=="error"){
                                  echo "<div class='error'>Sorry there was an ERROR....!</div>";
-
                             }
                          }
                     }
                     ?>
         </section>
-
         <div class="card">
-
         </div>
-
         <section class="ftco-section-2" style="margin-right:20%;margin-left: 20%; margin-top: 50px">
-
             <!--start of upload profile image-->
             <div id="id2" class="modal">
                 <form class="modal-content animate" method="post" action="userProfile.php" enctype="multipart/form-data">
-
                         <span onclick="document.getElementById('id2').style.display='none'" class="close" title="Close Modal">&times;</span>
-
                     <div class="modal-content">
                         <input type="file" name ="profileImg">
                     </div>
                     <button class="button1" name="profileUpload" type="submit">Upload</button><br><br><br><br>
                         <button type="button" onclick="document.getElementById('id2').style.display='none'" class="cancelbtn">Cancel</button><br><br>
-
                 </form>
             </div>
-
-
-
                 <?php
                 if (isset($_GET['search'])) {
                 if ($_GET['search']=="nothing") {?>
@@ -206,7 +171,7 @@ $username=$_SESSION['username'];
                     </script>
                 <?php
 
-                }  else {?>
+                }else{?>
                     <script>
                         alert("<?php echo $_SESSION['result'];?>\n\nUsername:\n<?php echo $_SESSION['uname']; ?>\n\nEmail:\n<?php echo $_SESSION['em']; ?>\n\nFirst Name:\n<?php echo $_SESSION['first']; ?>\n\nLast Name:\n<?php echo $_SESSION['last']; ?>");
                     </script>
@@ -218,7 +183,6 @@ $username=$_SESSION['username'];
                 // Get the modal
                 var mo = document.getElementById('id2');
                 var up = document.getElementById('update');
-
                 window.onclick = function(just) {
                     if ((just.target == mo) || (just.target == up)) {
                         mo.style.display = "none";
@@ -229,13 +193,18 @@ $username=$_SESSION['username'];
             </script>
             <!--end of upload profile image-->
             <?php
+            // display the profile images so if the user does not have profile image dif_image will show else display his profile image :)
+            // start of displays profile images
             if (empty($_SESSION['pic'])){ ?>
                 <img style="width: 200px; height: 200px; cursor: pointer" alt="dif pic" class="profile_img"  src="profileImage/admin_profile.png" onclick="document.getElementById('id2').style.display='block'">
             <?php }else{
                 $image = "profileImage/".$_SESSION['pic'];
                 ?>
                 <img style="width: 200px; height: 200px;cursor: pointer" alt="dif pic" class="profile_img"  src="<?php echo $image;?>" onclick="document.getElementById('id2').style.display='block'">
-            <?php } ?>
+            <?php }
+            // end of displays profile images
+            ?>
+
             <div id="update" class="modal">
                 <form class="modal-content animate" method="post" action="userUpdateProfile.php" onsubmit="return confirm('this process will sign out,\n\nAre sure you?')">
                     <span onclick="document.getElementById('update').style.display='none'" class="close" title="Close Modal">&times;</span>

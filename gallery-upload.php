@@ -66,7 +66,7 @@ if (isset($_POST['submit'])){
        }else{
            header('location : gallery.php?upload=big');
            exit();
-           echo "the image size is too big!";
+
        }
    }else{
        header('location : gallery.php?upload=error');

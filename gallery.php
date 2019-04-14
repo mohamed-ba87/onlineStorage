@@ -97,6 +97,8 @@ else{
             <ul>
                 <li><a href="userProfile.php">Profile</a></li>
                 <li class="colorlib-active" ><a href="gallery.php">Gallery</a></li>
+                <li><a href="messages.php">send Message</a></li>
+                <li><a href="inbox.php">Index</a></li>
 
             </ul>
         </nav>
@@ -154,7 +156,7 @@ else{
                             //here we will pass java script link
                             ?>
                             <div class="col-md-4 ftco-animate">
-                                <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/<?php echo $imgName;?>);">
+                                <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/.<?php echo $imgName;?>);">
                                     <div class="overlay"></div>
                                     <div class="text text-center">
                                         <h3><?php echo $imageTit;?></h3>
@@ -174,42 +176,42 @@ else{
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container px-md-5">
 
-<?php
-
-if (isset($_GET['upload'])){
-
-if ($_GET['upload']=="=empty"){?>
-    <script>
-        alert(<?php echo "images title or description is empty,\n\nPlease make sure you fill all the field..!"?>);
-    </script>
-<?php }
-
-
-    if ($_GET['upload']=="=full"){?>
-        <script>
-            alert("<?php echo 'Sorry you can not upload more images,because Your storage if full..!';?>");
-        </script>
-   <?php }
-   if ($_GET['upload']=="=success"){?>
-        <script>
-            alert("<?php echo 'Your file was uploaded successfully..!'?>");
-        </script>
-    <?php }
-
-
-    if ($_GET['upload']=="error"){?>
-        <script>
-        alert("<?php echo 'Result not found..!'?>");
-        </script>
-  <?php  }
-}
-
-?>
                 <div class="all">
+                    <?php
+
+                    if (isset($_GET['upload'])){
+
+                    if ($_GET['upload']=="=empty"){?>
+                        <script>
+                            alert(<?php echo "images title or description is empty,\n\nPlease make sure you fill all the field..!"?>);
+                        </script>
+                    <?php }
+
+
+                    if ($_GET['upload']=="=full"){?>
+                        <script>
+                            alert("<?php echo 'Sorry you can not upload more images,because Your storage if full..!';?>");
+                        </script>
+                    <?php }
+                    if ($_GET['upload']=="=success"){?>
+                        <script>
+                            alert("<?php echo 'Your file was uploaded successfully..!'?>");
+                        </script>
+                    <?php }
+
+
+                    if ($_GET['upload']=="error"){?>
+                        <script>
+                            alert("<?php echo 'Result not found..!'?>");
+                        </script>
+                    <?php  }
+                    }
+
+                    ?>
                     <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
                         <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
-                        <input class="inputFile" type="text" name="fileDis" placeholder="image des"><br><br>
+                        <input class="inputFile" type="text" name="fileDis" placeholder="image Description"><br><br>
                       <div class="input-container"><input type="file" name="file"></div><br><br>
 
 

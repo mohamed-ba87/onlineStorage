@@ -129,7 +129,7 @@ while ($rows = $result->fetch_assoc()) {
         <ul>
 
             <li> <button onclick="document.getElementById('add').style.display='block'" type="button" name="add">Add User</button></li>
-            <li><form method="post" action="adminHomePage.php"><button type="submit" name="update">Update</button></form></li>
+            <!--<li><form method="post" action="adminHomePage.php"><button type="submit" name="update">Update</button></form></li>-->
             <li><button onclick="document.getElementById('delete').style.display='block'" type="button" name="delete">Delete</button></li>
             <li><button onclick="document.getElementById('search').style.display='block'"  name="search" type="button">search</button></li><br><br><br>
             <li><form onsubmit="return confirm('Are you sure do you want to LOG OUT...?')" style="margin-top: 250px " method="post" action="log-out.php"><button class="exit" type="submit" name="out">sign out</button></form></li>

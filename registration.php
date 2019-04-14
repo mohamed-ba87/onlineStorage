@@ -71,7 +71,12 @@ if (isset($_POST['register'] )){
                             // insert the login data into login table
                             $sql_login= "INSERT INTO  login (username, email, password, types,photo) VALUES ('$username','$email','$password',0,'')";
                             $res=mysqli_query($db,$sql_login);
-                           // exit();
+
+
+                            // insert the user data into user information table (user/admin)
+                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
+                            mysqli_query($db,$sql_user);
+
                             // start of inserting the security questions and the answers to answers table
                             $answer1 = password_hash($ans1, PASSWORD_DEFAULT);
                             $answer2 = password_hash($ans2, PASSWORD_DEFAULT);
@@ -81,9 +86,7 @@ if (isset($_POST['register'] )){
                             // end of inserting the security questions and the answers to answers table
 
 
-                            // insert the user data into user information table (user/admin)
-                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
-                            mysqli_query($db,$sql_user);
+
                             $_SESSION['user']= $username;
                             header('location : login.php?registration=success');
 
