@@ -156,7 +156,7 @@ else{
                             //here we will pass java script link
                             ?>
                             <div class="col-md-4 ftco-animate">
-                                <a class="photography-entry img image-popup d-flex justify-content-center align-items-center" href="userImages/<?php echo $imgName;?>" style="background-image: url(userImages/.<?php echo $imgName;?>);">
+                                <a href="userImages/<?php echo $imgName;?>" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url('userImages/<?php echo $imgName;?>');">
                                     <div class="overlay"></div>
                                     <div class="text text-center">
                                         <h3><?php echo $imageTit;?></h3>
@@ -188,7 +188,7 @@ else{
                     <?php }
 
 
-                    if ($_GET['upload']=="=full"){?>
+                    if ($_GET['upload']=="full"){?>
                         <script>
                             alert("<?php echo 'Sorry you can not upload more images,because Your storage if full..!';?>");
                         </script>

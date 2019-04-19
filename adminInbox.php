@@ -35,24 +35,15 @@ $username= $_SESSION['username'];
     <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/style.css">
-    <!--<link rel="stylesheet" href="css/style.css">-->
+
 </head>
 <body>
 
 <div id="colorlib-page">
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
-        <h1 id="colorlib-logo"><a href="userProfile.php"><span class="flaticon-camera"></span><?php echo $_SESSION['username'];?></a></h1>
-        <nav id="colorlib-main-menu" role="navigation">
-            <ul>
-                <li><a href="userProfile.php">Profile</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
-                <li><a href="messages.php">Messages</a></li>
-                <li class="colorlib-active"><a href="inbox.php">Inbox</a></li>
-
-            </ul>
-        </nav>
-
+        <h3 id="colorlib-logo"><a href="adminHomePage.php">Online Storage<span></span>  <?php
+                echo $_SESSION['username'];?></a></h3>
         <div class="colorlib-footer">
 
         </div>
@@ -62,8 +53,20 @@ $username= $_SESSION['username'];
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
                     <div class="col-md-9 ftco-animate">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="userProfile.php">User Profile</a></span> <span>Inbox</span></p>
-                        <h1 class="mb-3 bread">Here You Can Find All Your Messages</h1>
+                        <h1 class="mb-3 bread">Here You Can Find All Your Messages</h1><br>
+                        <div >
+                            <form action="adminHomePage.php" method="post" >
+                                <button type="submit" name="back" style="  background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: darkmagenta;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius:5px ;
+    text-align: center;">Cleck Here Back To your Mean Page</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,27 +96,18 @@ $username= $_SESSION['username'];
                                             $sender=$rows['from_user'];
                                             $time=$rows['times'];
 
-                                            if ( !empty($imgName)){?>
-                                                <a href="messages_image/<?php echo $rows['imageName'];?>" style="background-image:url('messages_image/<?php echo $imgName;?>')" class="photography-entry img image-popup d-flex justify-content-center align-items-center"></a>
-
-                                    <?php
-                                            }else{?>
-                                                <img href="messages_image/default-image.png?>" class="img img-2" style="background-image: url(messages_image/default-image.png);">
-                                                  <?php
-                                            }
-                                   ?>
+                                            ?>
                                             <div class="text text-2 pt-2 mt-3">
-                                                <h3 class="mb-2"><?php echo $title;?></h3>
-
+                                                <h3 class="mb-2">Title:<?php echo " ".$title;?></h3>
+                                                <h3>From :<?php echo " ".$sender;?></h3>
                                                 <div class="meta-wrap">
                                                     <p class="meta">
-                                                        <span><h3>From :<?php echo " ".$sender;?></h3></span>
-                                                    <span> <h3> <?php echo $time;?></h3></span>
+                                                        <span>Time: <?php echo " ".$time;?></span>
                                                     </p>
                                                 </div>
-                                                <p class="mb-4"><h3>Message:<br></h3><?php echo $message;?></p>
+                                                <p class="mb-4">Message:<br><?php echo $message;?></p>
                                             </div>
-                                        <?php
+                                            <?php
                                         }
                                     }
                                     ?>
@@ -123,21 +117,6 @@ $username= $_SESSION['username'];
                         </div>
 
                     </div>
-                    <div class="col-lg-4 sidebar ftco-animate bg-light">
-                        <div class="sidebar-box">
-                            <form action="#" class="search-form">
-                                <div class="form-group">
-                                    <span class="icon icon-search"></span>
-                                    <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="sidebar-box">
-                            <h4>To Contact Us:</h4><br>
-                            <p>admin@gmail.com</p>
-                        </div>
-                    </div><!-- END COL -->
                 </div>
             </div>
         </section>

@@ -129,14 +129,24 @@ while ($rows = $result->fetch_assoc()) {
         <ul>
 
             <li> <button onclick="document.getElementById('add').style.display='block'" type="button" name="add">Add User</button></li>
-            <!--<li><form method="post" action="adminHomePage.php"><button type="submit" name="update">Update</button></form></li>-->
             <li><button onclick="document.getElementById('delete').style.display='block'" type="button" name="delete">Delete</button></li>
+            <li><form method="post" action="adminMessages.php"><button  type="submit" name="message">Send Message</button></form></li>
+            <li><form method="post" action="adminInbox.php"><button  type="submit" name="#">Inbox</button></form></li>
             <li><button onclick="document.getElementById('search').style.display='block'"  name="search" type="button">search</button></li><br><br><br>
             <li><form onsubmit="return confirm('Are you sure do you want to LOG OUT...?')" style="margin-top: 250px " method="post" action="log-out.php"><button class="exit" type="submit" name="out">sign out</button></form></li>
         </ul>
     </nav>
 
     <article>
+
+        <?php
+        if (isset($_GET['mess'])){
+            if ($_GET['mess']=="success"){?>
+                <script> alert("<?php echo 'message was sent successfully.';?>")</script>
+          <?php  }
+        }
+        ?>
+
         <?php if (isset($_GET['login'])){
             if ($_GET['login']=="success"){
                 echo "<div class='success'>
