@@ -64,7 +64,7 @@ $username= $_SESSION['username'];
     padding: 10px 20px;
     cursor: pointer;
     border-radius:5px ;
-    text-align: center;">Cleck Here Back To your Mean Page</button>
+    text-align: center;"> <-- Click Here Back To your Main Page</button>
                             </form>
                         </div>
                     </div>

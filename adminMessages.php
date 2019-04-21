@@ -51,12 +51,28 @@ $username= $_SESSION['username'];
     <div id="colorlib-main">
         <section class="ftco-section bg-light ftco-bread">
 
-
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center">
                     <div class="col-md-9 ftco-animate">
                         <h1 class="mb-3 bread">Here You Can Send Messages</h1>
                         <p class="mb-3 bread">Here you can send messages </p>
+
+                        <!--start of the button that take you back to the main page :)-->
+                        <div >
+                            <form action="adminHomePage.php" method="post" >
+                                <button type="submit" name="back" style="  background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: darkmagenta;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius:5px ;
+    text-align: center;"> <-- Click Here Back To your Main Page</button>
+                            </form>
+                        </div>
+                        <!--end of the button that take you back to the main page :)-->
+
                     </div>
                 </div>
             </div>
