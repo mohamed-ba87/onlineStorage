@@ -41,15 +41,16 @@ if (isset($_POST['add_user'])){
                         $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',1)";
                         $res=mysqli_query($db,$sql);
 
-                        // insert the tradesman data into tradesman table
+                        // insert the administrator personal information into user_info table
                         $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
                         mysqli_query($db,$sql_user);
-                        $_SESSION['user']= $username;
+                            $_SESSION['user_add']= $username;
                             $_SESSION['success'] = "new Admin was added successfully"." ".$username;
-                        header('location : adminHomePage.php?new_user=added');
-
+                        header('location : ../adminHomePage.php?new_user=added');
+exit();
                         }else{
                             if ( preg_match('/^[Add User]*$/',$type)){
+                                $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                             $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
                             $res=mysqli_query($db,$sql);
                             // insert the user info table

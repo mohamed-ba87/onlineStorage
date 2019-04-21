@@ -2,7 +2,7 @@
 session_start();
 include ('connection.php');
 
-$errors = array();
+
 if (isset($_POST['register'] )){
 
     $first= mysqli_real_escape_string($db,$_POST['first']);
@@ -16,15 +16,6 @@ if (isset($_POST['register'] )){
    $ans1 = mysqli_real_escape_string($db,$_POST['ans2']);
    $ans2 = mysqli_real_escape_string($db,$_POST['ans1']);
 
-    if (empty($first)) { array_push($errors, "first name is required"); }
-    if (empty($last)) { array_push($errors, "last name is required"); }
-    if (empty($username)) { array_push($errors, "Username is required"); }
-    if (empty($email)) { array_push($errors, "Email is required"); }
-    if (empty($pass1)) { array_push($errors, "Password is required"); }
-    if (empty($que1)) { array_push($errors, "choose question is required"); }
-    if (empty($que2)) { array_push($errors, "choose question is required"); }
-    if (empty($ans1)) { array_push($errors, "answer is required"); }
-    if (empty($ans1)) { array_push($errors, "answer is required"); }
 
     // checking time lool
     if (empty($first) || empty($last)   || empty($username)  || empty($email) || empty($pass1)  || empty($pass2) ){
@@ -45,6 +36,8 @@ if (isset($_POST['register'] )){
                     $check_user = "SELECT * FROM login WHERE username= '$username' OR email='$email' ";
                     $result = mysqli_query($db, $check_user);
                     $get = mysqli_num_rows($result);
+                    //print_r($get);
+                    //exit();
                     if ($get != 0) {
                         array_push($errors, "Sorry username/email was taken try again..!");
                         header('location: register.php?email_username=taken');

@@ -13,6 +13,7 @@ if (isset($_POST['submit'])){
         $newFile= strtolower(str_replace(" ","-",$newFile));
 
     }
+
     $title= mysqli_real_escape_string($db,$_POST['title']);
     $fileDis= mysqli_real_escape_string($db,$_POST['fileDis']);
 
@@ -35,14 +36,14 @@ if (isset($_POST['submit'])){
            $fileDestination="C:/inetpub/wwwroot/1808234/onlineStore/userImages/". $imageName;
 
            if (empty($title) || empty($fileDis)){
-               header('location gallery.php?upload=empty');
+               header('location : gallery.php?upload=empty');
                exit();
            }else{
                $select= "SELECT * FROM user_images WHERE username = '$username'";
                $ck=mysqli_query($db,$select);
                  $rowsNum= mysqli_num_rows($ck);
              //  $_SESSION['size']= $rowsNum;
-                 if ($rowsNum <21){
+                 if ($rowsNum <=20){
                  $setImage= $rowsNum+1;
                  $_SESSION['size']= $rowsNum;
             //   print_r($rowsNum);

@@ -93,7 +93,7 @@ while ($rows = $result->fetch_assoc()) {
         <?php }else{
             $image = "profileImage/".$_SESSION['pic'];
             ?>
-            <img class="profile_img" alt="upload pic" src="<?php echo $image;?>" onclick="document.getElementById('id01').style.display='block'">
+            <img style="border-radius: 50%" class="profile_img" alt="upload pic" src="<?php echo $image;?>" onclick="document.getElementById('id01').style.display='block'">
        <?php } ?>
         <center>    <!-- displaying profile image end here-->
 
@@ -249,9 +249,7 @@ while ($rows = $result->fetch_assoc()) {
 
         <?php if (isset($_GET['delete'])){
             if ($_GET['delete']=="com"){
-                echo "<div class='error'>
-                   user was deleted
-                </div>";
+                echo $_SESSION['delete'];
             }
         }?>
 

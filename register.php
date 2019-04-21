@@ -10,6 +10,10 @@ include ('connection.php');
     <link rel="stylesheet" href="css/unsemantic-grid-responsive-tablet.css">
     <link rel="stylesheet" href="css/style_re.css">
 
+    <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
+
+
     <title>online storage registration</title>
 </head>
 
@@ -17,13 +21,9 @@ include ('connection.php');
         <div class="grid-100">
             <header class="header1">
                 <div class="logo">
-                    <img src="#">
+                    <h1 id="colorlib-logo"><span class="flaticon-camera"></span>
+                        Online Storage</h1>
                 </div>
-
-                <div>
-                    <h1>Online Storage</h1>
-                </div>
-
 
             </header>
         </div>
@@ -106,7 +106,8 @@ include ('connection.php');
         </div>
             <div id="mo"  class="modal" >
                 <div class="modal-content animate">
-                    <h3>Please the security questions and the answer will saved for security </h3>
+                    <h3>Please choose the security questions and answer the questions</h3>
+                    <p>Your answer will be securely saved and will be use for a security purposes</p>
                     <span onclick="document.getElementById('mo').style.display='none'" class="close" title="Close Modal">&times;</span>
                     <label for="q1">question 1</label>
                     <select class="justMo" name = "q1">

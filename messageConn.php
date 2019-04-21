@@ -19,6 +19,9 @@ if (isset($_POST['sub_message'])){
             header('location : messages.php?mess=no');
             exit();
         }else {
+            while ($row= mysqli_fetch_assoc($query)){
+                $_SESSION['us']= $row['username'];
+            }
             $file = $_FILES['message_image'];
 
             $filename = $file['name'];
@@ -43,9 +46,9 @@ if (isset($_POST['sub_message'])){
                 }
 
 
-
+            $user_name= $_SESSION['us'];
             $sender= $_POST['sub_message'];
-            $sql_in= "INSERT INTO messages (title,message,photo,from_user,to_user) VALUES ('$title','$message','$imageName','$sender','$username')";
+            $sql_in= "INSERT INTO messages (title,message,photo,from_user,to_user) VALUES ('$title','$message','$imageName','$sender','$user_name')";
             $query_in= mysqli_query($db,$sql_in);
 
             move_uploaded_file($fileTmpName,$fileDestination);
@@ -53,10 +56,10 @@ if (isset($_POST['sub_message'])){
 
             $mo=$_SESSION['username'];
 
-            $sql_in1= "INSERT INTO user_mail_box (username,mail_box , message_id) VALUES ('$username','in','$getId')";
+            $sql_in1= "INSERT INTO user_mail_box (username,mail_box , message_id) VALUES ('$user_name','in','$getId')";
             $query_in1= mysqli_query($db,$sql_in1);
 
-            $sql_in2= "INSERT INTO user_mail_box (username,mail_box,message_id) VALUES ('$mo','out','$getId')";
+            $sql_in2= "INSERT INTO user_mail_box (username,mail_box,message_id) VALUES ('$sender','out','$getId')";
             $query_in2= mysqli_query($db,$sql_in2);
             header('location : messages.php?mess=success');
             exit();

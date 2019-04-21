@@ -26,7 +26,7 @@ if (isset($_POST['login'])){
         if ($check !=1){
             array_push($errors, "");
 
-            header('location: login.php?login=wrong_sql_NotThere');
+            header('location: login.php?login=wrong_s');
             exit();
         }else{
 
@@ -38,7 +38,7 @@ if (isset($_POST['login'])){
 
                             array_push($errors, "Was wrong Password");
 
-                            header('location: login.php?pass=password_wrong_user');
+                            header('location: login.php?login=pwrong');
                             exit();
                         }elseif ($password2==true){
                             $_SESSION['username']=$row['username'];
@@ -52,7 +52,6 @@ if (isset($_POST['login'])){
                             $_SESSION['last']=$rows['last_name'];
                             header('location : adminHomePage.php?login=success');
                             $_SESSION['allGood']= "you have logged in successfully";
-                            //header('location : adminHomePage.php?login=success');
                             header('location:adminHomePage.php?login=success');
                             exit();
                         }
@@ -62,7 +61,7 @@ if (isset($_POST['login'])){
                             $password2= password_verify($password,$row['password']);
                             if ($password2==false){
                                 array_push($errors, "Was wrong Password");
-                                header('location: login.php?password_wrong_user');
+                                header('location: login.php?login=pwrong');
                                 exit();
                             }elseif ($password2==true){
 

@@ -15,8 +15,12 @@ if (isset($_POST['delete'])){
         exit();
     }else{
         $_SESSION['delete']= $username." "."was deleted";
-        $de= "DELETE FROM login,user_info WHERE username = '$username' OR email= '$username'";
+        $de= "DELETE FROM login WHERE username = '$username' OR email= '$username'";
         $delete = mysqli_query($db,$de);
+
+        $des= "DELETE FROM user_info WHERE username = '$username' OR email= '$username'";
+        $deletes = mysqli_query($db,$des);
+
         header('location : ../adminHomePage.php?delete=com');
         echo "user was deleted";
         exit();

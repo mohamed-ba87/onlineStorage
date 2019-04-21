@@ -118,7 +118,7 @@ $username= $_SESSION['username'];
                                 <input type="text" class="form-control" name="user_name" placeholder="Username/email">
                             </div>
                             <div class="form-group">
-                                <label for="title">Title</label>
+                                <label for="title">Subject </label>
                                 <input type="text" class="form-control" name="title" placeholder="Title">
                             </div>
                             <div class="form-group">

@@ -6,6 +6,9 @@ include ('connection.php');?>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/unsemantic-grid-responsive-tablet.css">
+
+    <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
+    <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
     <title>login</title>
 </head>
 <body>
@@ -14,10 +17,8 @@ include ('connection.php');?>
     <div class="grid-100">
         <header class="header1">
             <div class="logo">
-                <img src="#">
-            </div>
-            <div>
-                <h1> Online Storage </h1>
+                <h1 id="colorlib-logo"><span class="flaticon-camera"></span>
+                    Online Storage</h1>
             </div>
         </header>
     </div>
@@ -45,22 +46,22 @@ include ('connection.php');?>
                     }
                 }?>
                 <?php if (isset($_GET['login'])){
-                    if ($_GET['login']=="wrong_sql_NotThere"){
+                    if ($_GET['login']=="wrong_s"){
                         echo "<div class='error'>Sorry username/email not right...!</div>";
                     }
                 }?>
 
-                <?php if (isset($_GET['pass'])){
-                    if ($_GET['pass']=="password_wrong_user"){
+                <?php if (isset($_GET['login'])){
+                    if ($_GET['login']=="pwrong"){
                         echo "<div class='error'>Was wrong Password, Please try again...!</div>";
                     }
                 }?>
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="" required>
+                    <input type="text" name="username" required>
                     <label>username/email</label>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="" required>
+                    <input type="password" name="password"  required>
                     <label>Password</label>
                 </div>
                 <?php

@@ -19,19 +19,21 @@ if (isset($_POST['sub_message_admin'])){
             header('location : adminMessages.php?mess=no');
             exit();
         }else {
+            while ($row= mysqli_fetch_assoc($query)){
+                $_SESSION['us_ad']= $row['username'];
+            }
 
-
+            $user_name= $_SESSION['us_ad'];
             $sender= $_POST['sub_message_admin'];
-            $sql_in= "INSERT INTO messages (title,message,photo,from_user,to_user) VALUES ('$title','$message',NULL ,'$sender','$username')";
+            $sql_in= "INSERT INTO messages (title,message,photo,from_user,to_user) VALUES ('$title','$message',NULL ,'$sender','$user_name')";
             $query_in= mysqli_query($db,$sql_in);
             $getId= mysqli_insert_id($db);
 
-            $mo=$_SESSION['username'];
 
-            $sql_in1= "INSERT INTO user_mail_box (username,mail_box , message_id) VALUES ('$username','in','$getId')";
+            $sql_in1= "INSERT INTO user_mail_box (username,mail_box , message_id) VALUES ('$user_name','in','$getId')";
             $query_in1= mysqli_query($db,$sql_in1);
 
-            $sql_in2= "INSERT INTO user_mail_box (username,mail_box,message_id) VALUES ('$mo','out','$getId')";
+            $sql_in2= "INSERT INTO user_mail_box (username,mail_box,message_id) VALUES ('$sender','out','$getId')";
             $query_in2= mysqli_query($db,$sql_in2);
             header('location : adminHomePage.php?mess=success');
             exit();

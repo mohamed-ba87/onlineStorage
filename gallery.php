@@ -67,9 +67,11 @@ else{
     <link rel="stylesheet" href="css/CSS/capture/css/flaticon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/icomoon.css">
     <link rel="stylesheet" href="css/CSS/capture/css/style.css">
-
+<link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
 
     <link rel="stylesheet" href="css/gallery.css">
+
+    <script type="text/javascript" src="css/CSS/capture/js/lightbox-plus-jquery.min.js"></script>
     <!-- this my staff just added-->
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -156,7 +158,9 @@ else{
                             //here we will pass java script link
                             ?>
                             <div class="col-md-4 ftco-animate">
-                                <a href="userImages/<?php echo $imgName;?>" class="photography-entry img image-popup d-flex justify-content-center align-items-center" style="background-image: url('userImages/<?php echo $imgName;?>');">
+                                <a href="userImages/<?php echo $imgName;?>" data-lightbox="mygallery" data-title="<?php echo $imageTit;?>"
+                                   class="photography-entry img  d-flex justify-content-center align-items-center"
+                                   style="background-image: url('userImages/<?php echo $imgName;?>');">
                                     <div class="overlay"></div>
                                     <div class="text text-center">
                                         <h3><?php echo $imageTit;?></h3>
@@ -181,9 +185,9 @@ else{
 
                     if (isset($_GET['upload'])){
 
-                    if ($_GET['upload']=="=empty"){?>
+                    if ($_GET['upload']=="empty"){?>
                         <script>
-                            alert(<?php echo "images title or description is empty,\n\nPlease make sure you fill all the field..!"?>);
+                            alert("<?php echo "images title or description is empty,Please make sure you fill all the field..!"?>");
                         </script>
                     <?php }
 
@@ -193,7 +197,7 @@ else{
                             alert("<?php echo 'Sorry you can not upload more images,because Your storage if full..!';?>");
                         </script>
                     <?php }
-                    if ($_GET['upload']=="=success"){?>
+                    if ($_GET['upload']=="success"){?>
                         <script>
                             alert("<?php echo 'Your file was uploaded successfully..!'?>");
                         </script>
@@ -202,14 +206,20 @@ else{
 
                     if ($_GET['upload']=="error"){?>
                         <script>
-                            alert("<?php echo 'Result not found..!'?>");
+                            alert("<?php echo 'there was an error sorry you must fill all th field...!'?>");
                         </script>
                     <?php  }
+                    if ($_GET['upload']=="big"){?>
+                        <script>
+                            alert("<?php echo 'SORRY the file you uploaded was bigger that 250kb'?>");
+                        </script>
+                    <?php  }
+
                     }
 
                     ?>
                     <form method='post' action='gallery-upload.php' enctype='multipart/form-data'>
-                        <input class="inputFile" type="text" name="filename" placeholder="file title"><br><br>
+                        <input class="inputFile" type="text" name="filename" placeholder="file Name"><br><br>
                         <input class="inputFile" type="text" name="title" placeholder="file title"><br><br>
                         <input class="inputFile" type="text" name="fileDis" placeholder="image Description"><br><br>
                       <div class="input-container"><input type="file" name="file"></div><br><br>

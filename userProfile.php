@@ -131,10 +131,17 @@ if (isset($_POST['profileUpload'])){
                             echo  $_SESSION['username']." ";
                             ?> Profile</h1>
                     </div>
+
                     <?php
+                    if (isset($_GET['login'])){
+                        if ($_GET['login'] == "success"){?>
+                        <script>alert("<?php echo  $_SESSION['allGood'];?>")</script>   <?php
+                        }
+                    }
                     if (isset($_GET['userU'])){
-                        if ($_GET['userU']=="good"){
-                            echo "<div class='error'>your Profile was Updated..</div>";
+                        if ($_GET['userU']=="good"){?>
+                    <script>alert("<?php echo 'your Profile was Updated successfully..!';?>");</script>
+              <?php
                         }else{
                              if ($_GET['userU']=="error"){
                                  echo "<div class='error'>Sorry there was an ERROR....!</div>";
@@ -200,13 +207,15 @@ if (isset($_POST['profileUpload'])){
             <?php }else{
                 $image = "profileImage/".$_SESSION['pic'];
                 ?>
-                <img style="width: 200px; height: 200px;cursor: pointer" alt="dif pic" class="profile_img"  src="<?php echo $image;?>" onclick="document.getElementById('id2').style.display='block'">
+                <img  style=" border-radius: 50% ;width: 200px; height: 200px;cursor: pointer" alt="dif pic" class="profile_img"  src="<?php echo $image;?>" onclick="document.getElementById('id2').style.display='block'">
             <?php }
             // end of displays profile images
             ?>
 
+
             <div id="update" class="modal">
-                <form class="modal-content animate" method="post" action="userUpdateProfile.php" onsubmit="return confirm('this process will sign out,\n\nAre sure you?')">
+
+                <form class="modal-content animate" method="post" action="userUpdateProfile.php" onsubmit="return confirm('Are you sure.......?')">
                     <span onclick="document.getElementById('update').style.display='none'" class="close" title="Close Modal">&times;</span>
                     <div class="modal-content">
                         <h3>here you can update your personal information</h3>
