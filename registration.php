@@ -62,23 +62,23 @@ if (isset($_POST['register'] )){
 
                             $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                             // insert the login data into login table
-                            $sql_login= "INSERT INTO  login (username, email, password, types,photo) VALUES ('$username','$email','$password',0,'')";
+                            $sql_login= "INSERT INTO  login (username, email, password, types,photo,first_name ,last_name) VALUES ('$username','$email','$password',1,'','$first','$last')";
                             $res=mysqli_query($db,$sql_login);
 
 
                             // insert the user data into user information table (user/admin)
-                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
-                            mysqli_query($db,$sql_user);
+                           // $sql_user_info= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
+                           // mysqli_query($db,$sql_user_info);
 
                             // start of inserting the security questions and the answers to answers table
                             $answer1 = password_hash($ans1, PASSWORD_DEFAULT);
                             $answer2 = password_hash($ans2, PASSWORD_DEFAULT);
 
-                            $sql_user= "INSERT INTO answers (username,question1_id ,answer_q1,question2_id,answer_q2) VALUES ('$username', '$qid1','$answer1','$qid2','$answer2')";
-                           $resu= mysqli_query($db,$sql_user);
+                            $sql_user_answer= "INSERT INTO answers (username,question1_id ,answer_q1,question2_id,answer_q2) VALUES ('$username', '$qid1','$answer1','$qid2','$answer2')";
+                           $resu= mysqli_query($db,$sql_user_answer);
                             // end of inserting the security questions and the answers to answers table
 
-
+                          
 
                             $_SESSION['user']= $username;
                             header('location : login.php?registration=success');

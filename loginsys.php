@@ -44,7 +44,7 @@ if (isset($_POST['login'])){
                             $_SESSION['username']=$row['username'];
                             $_SESSION['email']=$row['email'];
                             $user= $row['username'];
-                            $sql1= "SELECT * FROM user_info WHERE username='$user'";
+                            $sql1= "SELECT * FROM login WHERE username='$user'";
                             $result1 = mysqli_query($db,$sql1);
                             $check1= mysqli_num_rows($result1);
                             $rows = mysqli_fetch_assoc($result1);
@@ -68,7 +68,7 @@ if (isset($_POST['login'])){
                                 $_SESSION['username']=$row['username'];
                                 $_SESSION['email']=$row['email'];
                                 $user= $row['username'];
-                                $sql1= "SELECT * FROM user_info WHERE username='$user'";
+                                $sql1= "SELECT * FROM login WHERE username='$user'";
                                 $result1 = mysqli_query($db,$sql1);
                                 while ($rows = mysqli_fetch_assoc($result1)){
                                     $_SESSION['first']=$rows['first_name'];

@@ -55,16 +55,19 @@ $sqlLog = "SELECT * FROM login WHERE  username = '$username' ";
 $resultLog = $db->query($sqlLog);
 
 while ($row = $resultLog->fetch_assoc()) {
+    $_SESSION['na'] = $row['first_name'];
+    $_SESSION['na1'] = $row['last_name'];
     $_SESSION['pic']= $row['photo'];
-}
 
+}
+/*
 $sql = "SELECT * FROM user_info WHERE  username = '$username' ";
 $result = $db->query($sql);
 
 while ($rows = $result->fetch_assoc()) {
     $_SESSION['na'] = $rows['first_name'];
     $_SESSION['na1'] = $rows['last_name'];
-}
+}*/
 ?>
 
 <!DOCTYPE html>

@@ -8,9 +8,9 @@ if (isset($_POST['update'])){
 
     if (! empty($first) ||! empty($last) ){
         // $users= mysqli_query($db,$user);
-        $user1= "UPDATE user_info SET first_name='$first',last_name='$last' WHERE username='$username'";
+        $user1= "UPDATE login SET first_name='$first',last_name='$last' WHERE username='$username'";
         $users1= mysqli_query($db,$user1);
-        $sql1= "SELECT * FROM user_info WHERE username='$username'";
+        $sql1= "SELECT * FROM login WHERE username='$username'";
         $result1 = mysqli_query($db,$sql1);
      while ($rows = mysqli_fetch_assoc($result1)) {
          $_SESSION['firstUP'] = $rows['first_name'];

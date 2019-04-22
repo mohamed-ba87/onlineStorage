@@ -38,12 +38,12 @@ if (isset($_POST['add_user'])){
                         if ( preg_match('/^[Add Administrator]*$/',$type)){
                         $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
                         // insert the login data into login table
-                        $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',1)";
+                        $sql= "INSERT INTO login (username,email,password,types,photo,first_name,last_name) VALUES ('$username','$email','$password',1,'','$first','$last')";
                         $res=mysqli_query($db,$sql);
 
                         // insert the administrator personal information into user_info table
-                        $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
-                        mysqli_query($db,$sql_user);
+                       // $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
+                     //   mysqli_query($db,$sql_user);
                             $_SESSION['user_add']= $username;
                             $_SESSION['success'] = "new Admin was added successfully"." ".$username;
                         header('location : ../adminHomePage.php?new_user=added');
@@ -51,11 +51,11 @@ exit();
                         }else{
                             if ( preg_match('/^[Add User]*$/',$type)){
                                 $password = password_hash($pass2, PASSWORD_DEFAULT);// HASH the password
-                            $sql= "INSERT INTO login (username,email,password,types) VALUES ('$username','$email','$password',0)";
+                            $sql= "INSERT INTO login (username,email,password,types,photo,first_name,last_name) VALUES ('$username','$email','$password',0,'',, '$first','$last')";
                             $res=mysqli_query($db,$sql);
                             // insert the user info table
-                            $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
-                            mysqli_query($db,$sql_user);
+                          //  $sql_user= "INSERT INTO user_info (username,first_name,last_name) VALUES ('$username', '$first','$last')";
+                         //   mysqli_query($db,$sql_user);
                             $_SESSION['user_add']= $username;
                             header('location : ../adminHomePage.php?new_user=added');
                             }else{
